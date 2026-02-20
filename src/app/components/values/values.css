@@ -1,0 +1,565 @@
+/* src/components/values/values.css */
+
+.values-section {
+    padding: 80px 0 60px;
+    background: linear-gradient(135deg, #fff 0%, #fcfcfc 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+}
+
+/* Японский паттерн */
+.japanese-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(45deg, 
+            rgba(183, 28, 28, 0.02) 0px, 
+            rgba(183, 28, 28, 0.02) 2px,
+            transparent 2px, 
+            transparent 10px
+        );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Анимация сакуры */
+.sakura-petals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.petal {
+    position: absolute;
+    top: -10%;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(244, 81, 30, 0.25), 
+        rgba(183, 28, 28, 0.15)
+    );
+    border-radius: 150% 0 150% 0;
+    transform: rotate(45deg);
+    animation: fall linear infinite;
+    opacity: 0;
+}
+
+@keyframes fall {
+    0% {
+        top: -10%;
+        opacity: 0.6;
+        transform: rotate(45deg) translateX(0);
+    }
+    100% {
+        top: 110%;
+        opacity: 0;
+        transform: rotate(225deg) translateX(-20px);
+    }
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.values-header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: headerReveal 1s ease;
+}
+
+@keyframes headerReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.values-subtitle-en {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #B71C1C;
+    margin-bottom: 10px;
+    position: relative;
+    padding: 0 15px;
+}
+
+.values-subtitle-en::before,
+.values-subtitle-en::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #B71C1C, transparent);
+}
+
+.values-subtitle-en::before {
+    left: -20px;
+    animation: lineExpand 1s ease 0.3s both;
+}
+
+.values-subtitle-en::after {
+    right: -20px;
+    animation: lineExpand 1s ease 0.3s both;
+}
+
+@keyframes lineExpand {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 20px;
+        opacity: 1;
+    }
+}
+
+.values-title {
+    font-size: 42px;
+    color: #1E1E1E;
+    margin-bottom: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.title-highlight {
+    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+}
+
+.title-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #B71C1C, #F4511E, transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: underlineReveal 0.8s ease 0.5s forwards;
+}
+
+@keyframes underlineReveal {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.values-subtitle {
+    font-size: 16px;
+    color: #5F5F5F;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    perspective: 1000px;
+}
+
+.value-card {
+    height: 280px; /* Уменьшили с 350px */
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(40px) rotateX(5deg);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.value-card.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.value-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    z-index: 20;
+}
+
+.value-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+}
+
+.value-card:hover .value-card-inner {
+    transform: rotateY(180deg);
+}
+
+.value-front, .value-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.value-front {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+.value-front::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(183, 28, 28, 0.08),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: cardShine 8s infinite;
+}
+
+@keyframes cardShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    30%, 100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.value-back {
+    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    color: white;
+    transform: rotateY(180deg);
+    position: relative;
+    overflow: hidden;
+}
+
+.value-back::before {
+    content: '☯';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 100px;
+    opacity: 0.1;
+    transform: rotate(15deg);
+}
+
+.value-back-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 70%);
+    pointer-events: none;
+}
+
+.value-icon-wrapper {
+    width: 90px; /* Уменьшили со 120px */
+    height: 90px; /* Уменьшили со 120px */
+    margin-bottom: 15px; /* Уменьшили с 25px */
+    background: linear-gradient(135deg, rgba(183,28,28,0.1), rgba(244,81,30,0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    position: relative;
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.value-card:hover .value-icon-wrapper {
+    animation: spinIcon 0.8s ease;
+}
+
+@keyframes spinIcon {
+    0% {
+        transform: rotate(0) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.08);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.value-icon {
+    font-size: 45px; /* Уменьшили с 60px */
+    color: #B71C1C;
+    transition: all 0.4s ease;
+}
+
+.value-card:hover .value-icon {
+    color: #F4511E;
+    filter: drop-shadow(0 3px 10px rgba(183,28,28,0.3));
+}
+
+.value-title {
+    font-size: 18px; /* Уменьшили с 22px */
+    font-weight: 600;
+    color: #1E1E1E;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.value-number {
+    font-size: 70px; /* Уменьшили со 100px */
+    font-weight: 800;
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    color: rgba(183,28,28,0.05);
+    line-height: 1;
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.value-card:hover .value-number {
+    transform: scale(1.15);
+    color: rgba(183,28,28,0.1);
+}
+
+.value-description {
+    font-size: 15px; /* Уменьшили с 18px */
+    line-height: 1.5;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    max-width: 220px;
+}
+
+/* Декоративная волна */
+.values-wave {
+    margin-top: 40px;
+    opacity: 0.2;
+    animation: waveMove 12s linear infinite;
+}
+
+@keyframes waveMove {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-15px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+
+/* Планшеты */
+@media (max-width: 1024px) {
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .values-title {
+        font-size: 36px;
+    }
+    
+    .value-card {
+        height: 260px;
+    }
+}
+
+/* Маленькие планшеты */
+@media (max-width: 768px) {
+    .values-section {
+        padding: 50px 0 40px;
+    }
+    
+    .values-header {
+        margin-bottom: 35px;
+    }
+    
+    .values-title {
+        font-size: 32px;
+    }
+    
+    .values-subtitle {
+        font-size: 15px;
+    }
+    
+    .value-card {
+        height: 240px;
+    }
+    
+    .value-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 12px;
+    }
+    
+    .value-icon {
+        font-size: 40px;
+    }
+    
+    .value-title {
+        font-size: 17px;
+        margin-bottom: 5px;
+    }
+    
+    .value-number {
+        font-size: 60px;
+        right: 10px;
+    }
+    
+    .value-description {
+        font-size: 14px;
+        line-height: 1.4;
+        max-width: 200px;
+    }
+}
+
+/* Мобильные телефоны */
+@media (max-width: 480px) {
+    .values-section {
+        padding: 40px 0 30px;
+    }
+    
+    .values-header {
+        margin-bottom: 25px;
+    }
+    
+    .values-title {
+        font-size: 28px;
+    }
+    
+    .values-subtitle-en {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+    
+    .values-subtitle {
+        font-size: 14px;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .value-card {
+        height: 220px; /* Еще меньше на мобилках */
+    }
+    
+    .value-card-inner {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+    
+    .value-front, .value-back {
+        padding: 15px 12px;
+    }
+    
+    .value-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 8px;
+    }
+    
+    .value-icon {
+        font-size: 35px;
+    }
+    
+    .value-title {
+        font-size: 16px;
+        margin-bottom: 3px;
+    }
+    
+    .value-number {
+        font-size: 50px;
+        bottom: 0;
+        right: 8px;
+    }
+    
+    .value-description {
+        font-size: 13px;
+        max-width: 180px;
+    }
+    
+    .petal {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+/* Очень маленькие телефоны */
+@media (max-width: 360px) {
+    .value-card {
+        height: 200px;
+    }
+    
+    .value-icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .value-icon {
+        font-size: 30px;
+    }
+    
+    .value-title {
+        font-size: 15px;
+    }
+    
+    .value-description {
+        font-size: 12px;
+        max-width: 160px;
+    }
+    
+    .value-number {
+        font-size: 45px;
+    }
+}

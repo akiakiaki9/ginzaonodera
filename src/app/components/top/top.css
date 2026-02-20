@@ -1,0 +1,603 @@
+/* src/components/best-offers/best-offers.css */
+
+.best-offers {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.best-offers::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(183, 28, 28, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.best-offers-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.best-offers-title {
+    font-size: 42px;
+    color: #1E1E1E;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.best-offers-title-icon {
+    color: #F4511E;
+    font-size: 36px;
+    animation: starPulse 2s infinite;
+}
+
+@keyframes starPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.best-offers-subtitle {
+    font-size: 18px;
+    color: #5F5F5F;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.best-offers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.best-offer-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.best-offer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(183, 28, 28, 0.15);
+}
+
+.best-offer-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3);
+    animation: badgeGlow 2s infinite;
+}
+
+@keyframes badgeGlow {
+    0%, 100% {
+        box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(244, 81, 30, 0.5);
+    }
+}
+
+/* ОДИНАКОВЫЙ РАЗМЕР ФОТО */
+.best-offer-image {
+    width: 100%;
+    height: 250px; /* Фиксированная высота */
+    overflow: hidden;
+    position: relative;
+    background-color: #f5f5f5; /* Фон пока грузится */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.best-offer-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.05), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.best-offer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ВАЖНО: обрезает фото чтобы заполнить контейнер */
+    object-position: center; /* Центрирует изображение */
+    transition: transform 0.5s ease;
+}
+
+/* Если фото портретное (высокое) - показываем целиком с белыми полосами */
+.best-offer-image.img-contain img {
+    object-fit: contain;
+    background-color: #f5f5f5;
+}
+
+.best-offer-card:hover .best-offer-image img {
+    transform: scale(1.1);
+}
+
+.best-offer-content {
+    padding: 25px;
+    background: white;
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.best-offer-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1E1E1E;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    /* Ограничиваем название 2 строками */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 50px;
+}
+
+.best-offer-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #B71C1C;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.best-offer-price::after {
+    content: 'сум';
+    font-size: 14px;
+    color: #5F5F5F;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.best-offer-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto; /* Прижимаем кнопки к низу */
+}
+
+.best-offer-btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.best-offer-btn.details {
+    background-color: transparent;
+    color: #B71C1C;
+    border: 2px solid #B71C1C;
+    flex: 1;
+}
+
+.best-offer-btn.details:hover {
+    background-color: #B71C1C;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.best-offer-btn.cart {
+    background-color: #B71C1C;
+    color: white;
+    border: 2px solid #B71C1C;
+    width: 50px;
+    padding: 12px;
+    font-size: 18px;
+}
+
+.best-offer-btn.cart:hover {
+    background-color: #8B0000;
+    border-color: #8B0000;
+    transform: translateY(-2px) rotate(360deg);
+}
+
+.best-offers-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.best-offers-all-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(183, 28, 28, 0.3);
+}
+
+.best-offers-all-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.4);
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+
+/* Планшеты и маленькие ноутбуки */
+@media (max-width: 1200px) {
+    .best-offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .best-offers-title {
+        font-size: 36px;
+    }
+    
+    .best-offer-image {
+        height: 220px;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 768px) {
+    .best-offers {
+        padding: 60px 0;
+    }
+    
+    .best-offers-header {
+        margin-bottom: 40px;
+    }
+    
+    .best-offers-title {
+        font-size: 32px;
+    }
+    
+    .best-offers-subtitle {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+    
+    .best-offers-grid {
+        gap: 20px;
+    }
+    
+    .best-offer-image {
+        height: 200px; /* Чуть меньше на планшетах */
+    }
+    
+    .best-offer-name {
+        font-size: 16px;
+        min-height: 44px;
+        margin-bottom: 10px;
+    }
+    
+    .best-offer-price {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .best-offer-content {
+        padding: 20px;
+    }
+    
+    .best-offer-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .best-offer-btn.cart {
+        width: 44px;
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+/* Мобильные телефоны */
+@media (max-width: 480px) {
+    .best-offers {
+        padding: 40px 0;
+    }
+    
+    .best-offers-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        max-width: 350px;
+        margin: 0 auto 30px;
+    }
+    
+    .best-offers-title {
+        font-size: 28px;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .best-offers-title-icon {
+        font-size: 28px;
+    }
+    
+    .best-offers-subtitle {
+        font-size: 14px;
+    }
+    
+    .best-offer-card {
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    .best-offer-image {
+        height: 180px; /* Еще меньше на мобилках */
+    }
+    
+    .best-offer-content {
+        padding: 15px;
+    }
+    
+    .best-offer-name {
+        font-size: 15px;
+        min-height: 40px;
+        margin-bottom: 8px;
+    }
+    
+    .best-offer-price {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .best-offer-price::after {
+        font-size: 12px;
+    }
+    
+    .best-offer-actions {
+        gap: 8px;
+    }
+    
+    .best-offer-btn.details {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .best-offer-btn.cart {
+        width: 40px;
+        padding: 8px;
+        font-size: 15px;
+    }
+    
+    .best-offers-all-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Очень маленькие телефоны */
+@media (max-width: 360px) {
+    .best-offer-image {
+        height: 160px;
+    }
+    
+    .best-offer-content {
+        padding: 12px;
+    }
+    
+    .best-offer-name {
+        font-size: 14px;
+        min-height: 36px;
+    }
+    
+    .best-offer-price {
+        font-size: 16px;
+    }
+}
+
+/* Анимация появления карточек */
+.best-offer-card {
+    animation: cardAppear 0.5s ease forwards;
+    opacity: 0;
+}
+
+.best-offer-card:nth-child(1) { animation-delay: 0.1s; }
+.best-offer-card:nth-child(2) { animation-delay: 0.2s; }
+.best-offer-card:nth-child(3) { animation-delay: 0.3s; }
+.best-offer-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Для фото с разными пропорциями можно добавить классы */
+.best-offer-image.portrait img {
+    object-fit: contain;
+    background-color: #f5f5f5;
+}
+
+.best-offer-image.landscape img {
+    object-fit: cover;
+}
+
+/* Добавьте эти стили в конец файла best-offers.css */
+
+/* Ссылка на изображение */
+.best-offer-image-link {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Ссылка на название */
+.best-offer-name-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.best-offer-name-link:hover .best-offer-name {
+    color: #B71C1C;
+}
+
+/* Обновленные стили для кнопки корзины */
+.best-offer-btn.cart {
+    background-color: #B71C1C;
+    color: white;
+    border: 2px solid #B71C1C;
+    width: 50px;
+    padding: 12px;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.best-offer-btn.cart:hover {
+    background-color: #8B0000;
+    border-color: #8B0000;
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(183, 28, 28, 0.3);
+}
+
+.best-offer-btn.cart:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* Анимация для кнопки при добавлении */
+.best-offer-btn.cart.added {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    animation: addedPulse 0.5s ease;
+}
+
+@keyframes addedPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Всплывающее уведомление */
+.added-notification {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    animation: notificationSlide 2s ease forwards;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@keyframes notificationSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    85% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+/* Анимация для иконки корзины */
+@keyframes cartBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.best-offer-btn.cart:not(.added):hover svg {
+    animation: cartBounce 0.5s ease infinite;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 480px) {
+    .best-offer-btn.cart {
+        width: 45px;
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    .added-notification {
+        bottom: 70px;
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+}

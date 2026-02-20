@@ -1,0 +1,488 @@
+/* src/app/contact/contact.css */
+
+.contact-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fcfcfc 0%, #ffffff 100%);
+}
+
+/* Hero секция */
+.contact-hero {
+    position: relative;
+    height: 300px;
+    background-image: url('/images/pagename.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.373));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.breadcrumb-link {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.breadcrumb-link:hover {
+    opacity: 1;
+    transform: translateX(-3px);
+}
+
+.breadcrumb-icon {
+    font-size: 14px;
+}
+
+.breadcrumb-separator {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.breadcrumb-current {
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+/* Сетка из двух блоков */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* Общие стили для блоков */
+.block-title {
+    font-size: 32px;
+    color: #1E1E1E;
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.block-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #B71C1C, #F4511E);
+    border-radius: 2px;
+}
+
+.block-subtitle {
+    font-size: 16px;
+    color: #5F5F5F;
+    margin-bottom: 30px;
+}
+
+/* Левый блок - информация */
+.contact-info-block {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    animation: slideInLeft 0.8s ease;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.info-section {
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.info-section:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.info-section:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.info-section:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.info-section:nth-child(4) {
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.section-icon {
+    font-size: 24px;
+    color: #B71C1C;
+    animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1E1E1E;
+}
+
+.section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-item,
+.info-item-link {
+    font-size: 15px;
+    color: #5F5F5F;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.info-item-link {
+    color: #B71C1C;
+    font-weight: 500;
+}
+
+.info-item-link:hover {
+    color: #F4511E;
+    transform: translateX(5px);
+}
+
+.info-note {
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(183, 28, 28, 0.03), rgba(244, 81, 30, 0.03));
+    border-radius: 12px;
+    border-left: 4px solid #B71C1C;
+    animation: glowNote 2s infinite;
+}
+
+@keyframes glowNote {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 rgba(183, 28, 28, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 10px rgba(183, 28, 28, 0.1);
+    }
+}
+
+.info-note p {
+    font-size: 14px;
+    color: #1E1E1E;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Правый блок - карта */
+.contact-map-block {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    animation: slideInRight 0.8s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.map-container {
+    flex: 1;
+    min-height: 350px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.map-container:hover {
+    box-shadow: 0 10px 25px rgba(183, 28, 28, 0.1);
+    transform: translateY(-3px);
+}
+
+.map-iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    transition: all 0.3s ease;
+}
+
+.map-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.map-button:hover {
+    transform: translateY(-3px) translateX(5px);
+    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.3);
+    gap: 15px;
+}
+
+.button-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.map-button:hover .button-icon {
+    transform: translateX(3px);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .contact-grid {
+        gap: 30px;
+    }
+
+    .block-title {
+        font-size: 28px;
+    }
+
+    .info-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-hero {
+        height: 250px;
+    }
+
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .breadcrumbs {
+        font-size: 14px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .contact-info-block,
+    .contact-map-block {
+        padding: 30px;
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .map-container {
+        min-height: 300px;
+    }
+
+    .map-iframe {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-hero {
+        height: 200px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .container {
+        padding: 0 15px 40px;
+    }
+
+    .contact-info-block,
+    .contact-map-block {
+        padding: 20px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .block-title {
+        font-size: 24px;
+    }
+
+    .block-subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .section-header {
+        margin-bottom: 10px;
+    }
+
+    .section-icon {
+        font-size: 20px;
+    }
+
+    .section-title {
+        font-size: 16px;
+    }
+
+    .info-item,
+    .info-item-link {
+        font-size: 14px;
+    }
+
+    .map-container {
+        min-height: 250px;
+    }
+
+    .map-iframe {
+        min-height: 250px;
+    }
+
+    .map-button {
+        padding: 12px 25px;
+        font-size: 14px;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Анимация для карты */
+@keyframes mapPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(183, 28, 28, 0.2);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(183, 28, 28, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(183, 28, 28, 0);
+    }
+}
+
+.map-container {
+    animation: mapPulse 3s infinite;
+}
