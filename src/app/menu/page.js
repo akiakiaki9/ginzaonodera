@@ -14,8 +14,7 @@ import {
 } from 'react-icons/fa';
 import {
     GiChickenLeg,
-    GiBowlOfRice,
-    GiRiceCooker
+    GiBowlOfRice
 } from 'react-icons/gi';
 import {
     FiGrid,
@@ -26,11 +25,12 @@ import {
 } from 'react-icons/fi';
 import { MdOutlineSoupKitchen } from 'react-icons/md';
 import { useCart } from '../context/CartContext';
-import DATA from '../utils/data';
+import DATA from '@/app/utils/data';
 import './menu.css';
-import { GiNoodles, GiSushis, GiFishCooked } from "react-icons/gi";
+import { GiNoodles } from "react-icons/gi";
+import { GiSushis } from "react-icons/gi";
+import { GiFishCooked } from "react-icons/gi";
 import { LuSalad } from "react-icons/lu";
-import { FiSearch } from "react-icons/fi";
 
 const MenuPage = () => {
     const [items, setItems] = useState([]);
@@ -39,11 +39,11 @@ const MenuPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortBy, setSortBy] = useState('default');
     const [priceRange, setPriceRange] = useState({ min: 0, max: 200000 });
-    const [showFilters, setShowFilters] = useState(false);
+    const [showFilters, setShowFilters] = useState(true); // true по умолчанию
     const [viewMode, setViewMode] = useState('grid');
     const [addedItems, setAddedItems] = useState({});
-    const [showPriceFilter, setShowPriceFilter] = useState(false);
-    const [showCategoryFilter, setShowCategoryFilter] = useState(false);
+    const [showPriceFilter, setShowPriceFilter] = useState(true); // открыт по умолчанию
+    const [showCategoryFilter, setShowCategoryFilter] = useState(true); // открыт по умолчанию
 
     const { addToCart } = useCart();
     const filterRef = useRef(null);
@@ -52,7 +52,7 @@ const MenuPage = () => {
     const categories = [
         { id: 'all', name: 'Все блюда', icon: FiGrid, count: DATA.length },
         { id: 'noodles', name: 'Лапша', icon: GiNoodles, count: DATA.filter(item => item.category === 'noodles').length },
-        { id: 'rolls', name: 'Горячие Роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'rolls').length },
+        { id: 'rolls', name: 'Роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'rolls').length },
         { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'cold_rolls').length },
         { id: 'soups', name: 'Супы', icon: MdOutlineSoupKitchen, count: DATA.filter(item => item.category === 'soups').length },
         { id: 'hot_dishes', name: 'Горячие блюда', icon: GiFishCooked, count: DATA.filter(item => item.category === 'hot_dishes').length },
@@ -106,7 +106,6 @@ const MenuPage = () => {
                 result.sort((a, b) => b.name.localeCompare(a.name));
                 break;
             default:
-                // По умолчанию сортируем по id
                 result.sort((a, b) => a.id - b.id);
         }
 
@@ -216,7 +215,7 @@ const MenuPage = () => {
                     </div>
                 </div>
 
-                {/* Расширенные фильтры */}
+                {/* Расширенные фильтры - всегда открыты */}
                 {showFilters && (
                     <div className="filters-panel" ref={filterRef}>
                         <div className="filters-grid">
@@ -388,7 +387,7 @@ const MenuPage = () => {
                         })
                     ) : (
                         <div className="no-results">
-                            <FiSearch className="no-results-icon" />
+                            <FaSearch className="no-results-icon" />
                             <h3>Ничего не найдено</h3>
                             <p>Попробуйте изменить параметры поиска</p>
                             <button className="reset-filters-btn" onClick={clearFilters}>
