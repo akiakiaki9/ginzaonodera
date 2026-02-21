@@ -81,7 +81,7 @@ const DATA = [
         id: 12,
         name: 'Рисовая лапша с морепродуктами',
         price: 120000,
-        image: '/images/menu/12.png',
+        image: '/images/menu/104.png',
         category: 'hot_dishes',
         isTop: true,
     },
@@ -216,7 +216,7 @@ const DATA = [
         id: 32,
         name: 'Сибуя',
         price: 125000,
-        image: '/images/menu/31.png',
+        image: '/images/menu/106.png',
         category: 'rolls',
         isTop: true,
     },
@@ -707,6 +707,13 @@ const DATA = [
         price: 35000,
         image: '/images/menu/103.png',
         category: 'tea',
+    },
+    {
+        id: 102,
+        name: '',
+        price: 0,
+        image: '/images/menu/91.png',
+        category: 'promo',
     }
 ];
 

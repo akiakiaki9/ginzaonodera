@@ -50,6 +50,7 @@ const MenuPage = () => {
     // Категории с иконками
     const categories = [
         { id: 'all', name: 'Все блюда', icon: FiGrid, count: DATA.length },
+        { id: 'promo', name: 'Акционные блюда', icon: FaCheck, count: DATA.filter(item => item.category === 'promo').length },
         { id: 'noodles', name: 'Лапша', icon: GiNoodles, count: DATA.filter(item => item.category === 'noodles').length },
         { id: 'rolls', name: 'Роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'rolls').length },
         { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'cold_rolls').length },

@@ -37,6 +37,7 @@ const Menu = () => {
     // Категории
     const categories = [
         { id: 'all', name: 'Всё меню', icon: FaUtensils },
+        { id: 'promo', name: 'Акционные блюда', icon: FaUtensils },
         { id: 'noodles', name: 'Лапша', icon: FaBowlFood },
         { id: 'rolls', name: 'Горячие Роллы', icon: GiSushis },
         { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis },
