@@ -4,7 +4,10 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import {
-    FaCheck
+    FaCheck,
+    FaStar,
+    FaGift,
+    FaFire
 } from 'react-icons/fa6';
 import { GiSushis } from 'react-icons/gi';
 import { FaUtensils, FaFish, FaLeaf, FaCoffee } from "react-icons/fa";
@@ -34,10 +37,17 @@ const Menu = () => {
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
 
+    // Функция для проверки, является ли товар акционным
+    const isPromoItem = (item) => {
+        // Проверяем по цене или по специальному флагу
+        return item.price >= 299000 || item.isPromo === true;
+    };
+
     // Категории
     const categories = [
         { id: 'all', name: 'Всё меню', icon: FaUtensils },
-        { id: 'promo', name: 'Акционные блюда', icon: FaUtensils },
+        { id: 'promo', name: 'Акционные блюда', icon: FaFire, isPromo: true },
+        { id: 'sets', name: 'Сеты', icon: FaUtensils },
         { id: 'noodles', name: 'Лапша', icon: FaBowlFood },
         { id: 'rolls', name: 'Горячие Роллы', icon: GiSushis },
         { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis },
@@ -59,6 +69,10 @@ const Menu = () => {
             if (selectedCategory === 'all') {
                 const shuffled = [...DATA].sort(() => 0.5 - Math.random());
                 setCategoryItems(shuffled.slice(0, 6));
+            } else if (selectedCategory === 'promo') {
+                // Фильтруем только акционные товары
+                const promoItems = DATA.filter(item => isPromoItem(item));
+                setCategoryItems(promoItems.slice(0, 6));
             } else {
                 const filtered = DATA.filter(item => item.category === selectedCategory);
                 setCategoryItems(filtered.slice(0, 6));
@@ -216,9 +230,10 @@ const Menu = () => {
                             return (
                                 <button
                                     key={category.id}
-                                    className={`category-btn ${isSelected ? 'active' : ''}`}
+                                    className={`category-btn ${isSelected ? 'active' : ''} ${category.isPromo ? 'promo-category' : ''}`}
                                     onClick={() => selectCategory(category.id)}
                                 >
+                                    {category.isPromo && <span className="promo-category-icon">🔥</span>}
                                     <Icon className="category-icon" />
                                     <span className="category-name">{category.name}</span>
                                     {isSelected && <span className="category-active-dot"></span>}

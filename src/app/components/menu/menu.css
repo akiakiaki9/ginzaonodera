@@ -730,3 +730,313 @@
         transform: translateY(-2px);
     }
 }
+
+/* Добавьте эти стили в конец файла menu.css */
+
+/* Стили для промо-категории (акционные блюда) */
+.promo-category {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.2));
+    border: 2px solid #FFD700;
+    animation: promoGlow 1.5s infinite, promoFloat 3s infinite;
+    overflow: visible;
+}
+
+.promo-category::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-radius: 75px;
+    z-index: -1;
+    animation: promoPulse 1.5s infinite;
+    opacity: 0.3;
+}
+
+.promo-category::after {
+    content: '🔥';
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    font-size: 24px;
+    animation: promoFire 1s infinite;
+    filter: drop-shadow(0 0 5px gold);
+}
+
+.promo-category-icon {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    animation: promoBounce 1s infinite;
+    z-index: 10;
+    filter: drop-shadow(0 0 5px gold);
+}
+
+/* Анимация для активной промо-категории */
+.promo-category.active {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-color: #FFFFFF;
+    animation: promoActiveGlow 1s infinite;
+}
+
+.promo-category.active .category-icon {
+    filter: brightness(0) invert(1) !important;
+    animation: promoRotate 2s infinite;
+}
+
+.promo-category.active .category-name {
+    color: #1E1E1E;
+    font-weight: 700;
+}
+
+/* Специальный бейдж "АКЦИЯ" над кнопкой */
+.promo-badge-top {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1E1E1E;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+    border: 2px solid white;
+    z-index: 20;
+    animation: promoBadgePulse 1s infinite;
+}
+
+.promo-badge-top::before {
+    content: '🔥';
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+.promo-badge-top::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #FFA500;
+}
+
+/* Анимации */
+@keyframes promoGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        border-color: #FFD700;
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+        border-color: #FFFFFF;
+    }
+}
+
+@keyframes promoPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.5;
+    }
+}
+
+@keyframes promoFire {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.2) rotate(-10deg);
+    }
+    75% {
+        transform: scale(1.2) rotate(10deg);
+    }
+}
+
+@keyframes promoBounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+@keyframes promoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes promoActiveGlow {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(255, 215, 0, 1);
+    }
+}
+
+@keyframes promoRotate {
+    0%, 100% {
+        transform: scale(1.15) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.15) rotate(10deg);
+    }
+    75% {
+        transform: scale(1.15) rotate(-10deg);
+    }
+}
+
+@keyframes promoBadgePulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+/* Стили для самого бейджа на товарах */
+.promo-item-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1E1E1E;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: promoBadgeGlow 2s infinite;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.promo-item-badge::before {
+    content: '🔥';
+    font-size: 16px;
+    animation: promoFire 1s infinite;
+}
+
+@keyframes promoBadgeGlow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.8);
+    }
+}
+
+/* Адаптивность для мобилок */
+@media (max-width: 768px) {
+    .promo-category::after {
+        font-size: 20px;
+        top: -12px;
+        right: -8px;
+    }
+    
+    .promo-category-icon {
+        font-size: 20px;
+        top: -15px;
+    }
+    
+    .promo-badge-top {
+        top: -20px;
+        padding: 3px 10px;
+        font-size: 10px;
+    }
+    
+    .promo-item-badge {
+        top: 10px;
+        left: 10px;
+        padding: 4px 12px;
+        font-size: 12px;
+    }
+    
+    .promo-item-badge::before {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-category::after {
+        font-size: 18px;
+        top: -10px;
+        right: -5px;
+    }
+    
+    .promo-category-icon {
+        font-size: 18px;
+        top: -12px;
+    }
+    
+    .promo-badge-top {
+        top: -18px;
+        padding: 2px 8px;
+        font-size: 9px;
+    }
+    
+    .promo-item-badge {
+        padding: 3px 8px;
+        font-size: 10px;
+    }
+    
+    .promo-item-badge::before {
+        font-size: 12px;
+    }
+}
+
+/* Альтернативный вариант с конфетти */
+.promo-category-special {
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-category-special::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 215, 0, 0.1) 10px,
+        rgba(255, 215, 0, 0.1) 20px
+    );
+    animation: promoConfetti 10s linear infinite;
+}
+
+@keyframes promoConfetti {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(20px, 20px) rotate(45deg);
+    }
+}

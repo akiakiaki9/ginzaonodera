@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { FaTimes, FaPhone, FaEnvelope, FaUser, FaShoppingBag, FaMoneyBill, FaCreditCard, FaCloudUploadAlt, FaCheckCircle, FaTrash } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaTimes, FaPhone, FaEnvelope, FaUser, FaShoppingBag, FaMoneyBill, FaCheckCircle } from 'react-icons/fa';
 import { SiClickup } from 'react-icons/si';
 import { useCart } from '../context/CartContext';
 import './ordermodal.css';
@@ -10,47 +10,16 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('cash'); // 'cash' или 'click'
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [filePreview, setFilePreview] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
-    const fileInputRef = useRef(null);
     const { clearCart } = useCart();
 
     const phoneNumber = '+998 (94) 778-08-80';
 
-    // Данные для Click (пример)
+    // Реквизиты для Click (пример)
     const clickDetails = {
         cardNumber: '6262 5700 0040 8270',
         holderName: 'Халимов Ф М',
-        // bank: 'Kapitalbank',
-        // expiry: '12/25'
-    };
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setSelectedFile(file);
-
-            // Создаем превью для изображений
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setFilePreview(reader.result);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                setFilePreview(null);
-            }
-        }
-    };
-
-    const handleRemoveFile = () => {
-        setSelectedFile(null);
-        setFilePreview(null);
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-        }
     };
 
     const handleFormSubmit = async (e) => {
@@ -70,15 +39,14 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
         formData.append('total', total);
         formData.append('_subject', `Новый заказ от ${name} (${paymentMethod === 'cash' ? 'Наличные' : 'Click'})`);
 
-        // Добавляем файл, если он выбран
-        if (selectedFile) {
-            formData.append('paymentScreenshot', selectedFile);
+        // Добавляем информацию о том, что оплата будет произведена через Click
+        if (paymentMethod === 'click') {
+            formData.append('clickPayment', 'Оплата будет произведена через Click');
+            formData.append('clickCard', clickDetails.cardNumber);
         }
 
         try {
-            // Здесь нужно использовать сервис который поддерживает загрузку файлов
-            // Например, Formspree с поддержкой файлов или другой сервис
-            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            const response = await fetch('https://formspree.io/f/xzdajzzy', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -94,8 +62,6 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                     setSubmitStatus(null);
                     setName('');
                     setPhone('');
-                    setSelectedFile(null);
-                    setFilePreview(null);
                     setPaymentMethod('cash');
                 }, 3000);
             } else {
@@ -121,7 +87,7 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                     <FaShoppingBag className="modal-icon" />
                     <h2 className="modal-title">Оформление заказа</h2>
                     <p className="modal-subtitle">
-                        Выберите способ оплаты и оформите заказ
+                        Выберите способ оплаты и заполните форму
                     </p>
                 </div>
 
@@ -187,68 +153,12 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                                 <span className="click-label">Владелец:</span>
                                 <span className="click-value">{clickDetails.holderName}</span>
                             </div>
-                            {/* <div className="click-card-row">
-                                <span className="click-label">Банк:</span>
-                                <span className="click-value">{clickDetails.bank}</span>
-                            </div>
-                            <div className="click-card-row">
-                                <span className="click-label">Срок:</span>
-                                <span className="click-value">{clickDetails.expiry}</span>
-                            </div> */}
                         </div>
 
                         <p className="click-note">
-                            После оплаты, пожалуйста, прикрепите скриншот перевода
+                            <strong>Важно:</strong> После оплаты через Click, просто отправьте заявку. 
+                            Менеджер свяжется с вами для подтверждения оплаты.
                         </p>
-
-                        {/* Загрузка файла */}
-                        <div className="file-upload-section">
-                            <div
-                                className={`file-upload-area ${selectedFile ? 'has-file' : ''}`}
-                                onClick={() => !selectedFile && fileInputRef.current?.click()}
-                            >
-                                <input
-                                    type="file"
-                                    ref={fileInputRef}
-                                    onChange={handleFileChange}
-                                    accept="image/*,.pdf"
-                                    className="file-input"
-                                />
-
-                                {!selectedFile ? (
-                                    <>
-                                        <FaCloudUploadAlt className="upload-icon" />
-                                        <div className="upload-text">
-                                            <span className="upload-main">Нажмите для загрузки</span>
-                                            <span className="upload-hint">PNG, JPG, PDF до 10MB</span>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className="file-preview">
-                                        {filePreview ? (
-                                            <img src={filePreview} alt="Preview" className="preview-image" />
-                                        ) : (
-                                            <div className="file-icon">{selectedFile.name.split('.').pop()}</div>
-                                        )}
-                                        <div className="file-info">
-                                            <span className="file-name">{selectedFile.name}</span>
-                                            <span className="file-size">
-                                                {(selectedFile.size / 1024).toFixed(1)} KB
-                                            </span>
-                                        </div>
-                                        <button
-                                            className="remove-file"
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                handleRemoveFile();
-                                            }}
-                                        >
-                                            <FaTrash />
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
                     </div>
                 )}
 
@@ -258,7 +168,7 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                         <FaUser className="form-icon" />
                         <input
                             type="text"
-                            placeholder="Ваше имя"
+                            placeholder="Ваше имя *"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
@@ -270,7 +180,7 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                         <FaPhone className="form-icon" />
                         <input
                             type="tel"
-                            placeholder="Номер телефона"
+                            placeholder="Номер телефона *"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             required
@@ -280,13 +190,13 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
 
                     <button
                         type="submit"
-                        className={`submit-btn ${paymentMethod === 'click' && !selectedFile ? 'disabled' : ''}`}
-                        disabled={isSubmitting || (paymentMethod === 'click' && !selectedFile)}
+                        className="submit-btn"
+                        disabled={isSubmitting}
                     >
                         {isSubmitting ? (
                             'Отправка...'
                         ) : (
-                            paymentMethod === 'cash' ? 'Подтвердить заказ' : 'Отправить заказ с чеком'
+                            paymentMethod === 'cash' ? 'Подтвердить заказ' : 'Отправить заказ'
                         )}
                     </button>
 

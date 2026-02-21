@@ -30,6 +30,7 @@ import { GiNoodles } from "react-icons/gi";
 import { GiSushis } from "react-icons/gi";
 import { GiFishCooked } from "react-icons/gi";
 import { LuSalad } from "react-icons/lu";
+import { FaUtensils } from "react-icons/fa";
 
 const MenuPage = () => {
     const [items, setItems] = useState([]);
@@ -51,6 +52,8 @@ const MenuPage = () => {
     const categories = [
         { id: 'all', name: 'Все блюда', icon: FiGrid, count: DATA.length },
         { id: 'promo', name: 'Акционные блюда', icon: FaCheck, count: DATA.filter(item => item.category === 'promo').length },
+        { id: 'sets', name: 'Сеты', icon: FaUtensils, count: DATA.filter(item => item.category === 'sets').length },
+        { id: 'noodles', name: 'Лапша', icon: GiNoodles, count: DATA.filter(item => item.category === 'noodles').length },
         { id: 'noodles', name: 'Лапша', icon: GiNoodles, count: DATA.filter(item => item.category === 'noodles').length },
         { id: 'rolls', name: 'Роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'rolls').length },
         { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'cold_rolls').length },
