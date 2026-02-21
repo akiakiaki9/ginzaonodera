@@ -1,20 +1,20 @@
 :root {
   /* ===== Цветовая палитра ===== */
-  --color-background: #FFFFFF;
-  --color-text-primary: #1E1E1E;
-  --color-text-secondary: #5F5F5F;
-  --color-accent-red: #B71C1C;
-  --color-accent-orange: #F4511E;
-  --color-border: #E8E8E8;
-
+  --color-background: #F4511E; /* Оранжевый фон */
+  --color-text-primary: #FFFFFF; /* Белый текст */
+  --color-text-secondary: #FFE0B2; /* Светло-оранжевый для второстепенного текста */
+  --color-accent-red: #FF5722; /* Яркий оранжево-красный */
+  --color-accent-orange: #FF7043; /* Светло-оранжевый */
+  --color-border: #FFB74D; /* Оранжевая граница */
+  
   /* ===== Семантическое применение ===== */
-  --button-bg: var(--color-accent-red);
-  --button-text: #FFFFFF;
-  --button-hover-bg: #8B0000;
-  --link-color: var(--color-accent-red);
-  --link-hover-color: var(--color-accent-orange);
-  --badge-bg: var(--color-accent-orange);
-  --badge-text: #FFFFFF;
+  --button-bg: #FFFFFF; /* Белые кнопки */
+  --button-text: #F4511E; /* Оранжевый текст на кнопках */
+  --button-hover-bg: #FFE0B2; /* Светло-оранжевый при наведении */
+  --link-color: #FFFFFF; /* Белые ссылки */
+  --link-hover-color: #FFE0B2; /* Светло-оранжевый при наведении */
+  --badge-bg: #FFFFFF; /* Белые бейджи */
+  --badge-text: #F4511E; /* Оранжевый текст на бейджах */
 
   /* Навбар */
   --navbar-height: 100px;

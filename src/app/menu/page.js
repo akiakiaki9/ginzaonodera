@@ -61,7 +61,7 @@ const MenuPage = () => {
         { id: 'sushis', name: 'Суши', icon: GiSushis, count: DATA.filter(item => item.category === 'sushis').length },
         { id: 'fried_rice', name: 'Жареный рис', icon: GiBowlOfRice, count: DATA.filter(item => item.category === 'fried_rice').length },
         { id: 'coffee', name: 'Кофе', icon: FiCoffee, count: DATA.filter(item => item.category === 'coffee').length },
-        { id: 'drinks', name: 'Напитки', icon: FiDroplet, count: DATA.filter(item => item.category === 'drinks').length },
+        { id: 'tea', name: 'Чай', icon: FiCoffee, count: DATA.filter(item => item.category === 'tea').length },
     ];
 
     // Инициализация

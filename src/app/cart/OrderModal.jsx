@@ -12,7 +12,7 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
     const [submitStatus, setSubmitStatus] = useState(null);
     const { clearCart } = useCart();
 
-    const phoneNumber = '+998 (90) 123-45-67';
+    const phoneNumber = '+998 (94) 778-08-80';
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();

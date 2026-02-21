@@ -19,18 +19,45 @@
     width: 100%;
     height: 100%;
     z-index: 0;
+    background: #F4511E; /* Оранжевый фон на случай если медиа не загрузится */
 }
 
-.hero-media {
+/* Для ПК - изображение */
+.hero-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     opacity: 0;
     transition: opacity 1.5s ease;
+    display: block;
 }
 
-.hero-media.loaded {
+.hero-image.loaded {
     opacity: 1;
+}
+
+/* Для мобилок - видео */
+.video-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+}
+
+.hero-video.active {
+    opacity: 1;
+    z-index: 1;
 }
 
 /* Затемнение для текста */
@@ -40,36 +67,113 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg,
-            rgba(0, 0, 0, 0.5) 0%,
-            rgba(0, 0, 0, 0.3) 100%);
-    z-index: 1;
+    z-index: 2;
 }
 
 /* Контент по центру */
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     text-align: center;
     color: white;
     padding: 20px;
-    max-width: 800px;
+    max-width: 900px;
     animation: fadeInUp 1s ease;
 }
 
 .hero-title {
     font-size: 72px;
     font-weight: bold;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     letter-spacing: 4px;
     color: white;
 }
 
 .hero-subtitle {
     font-size: 24px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    opacity: 0.95;
+    color: white;
+}
+
+/* Промо баннеры */
+.promo-banners {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
     margin-bottom: 40px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+}
+
+.promo-item {
+    background: rgba(255, 255, 255, 0.15); /* Полупрозрачный белый */
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 60px;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: promoFloat 3s ease-in-out infinite;
+    box-shadow: 0 10px 30px rgba(244, 81, 30, 0.3); /* Оранжевая тень */
+    background: linear-gradient(135deg,
+            rgba(244, 81, 30, 0.7) 0%, /* Оранжевый градиент */
+            rgba(244, 81, 30, 0.5) 100%);
+}
+
+.promo-item.promo-left {
+    animation-delay: 0s;
+}
+
+.promo-item.promo-right {
+    animation-delay: 1.5s;
+}
+
+@keyframes promoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.promo-badge {
+    font-size: 32px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    animation: badgeSpin 10s linear infinite;
+}
+
+@keyframes badgeSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.promo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.promo-highlight {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FFFFFF, #FFE0B2); /* Белый градиент */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(244, 81, 30, 0.3);
+    line-height: 1.2;
+}
+
+.promo-small {
+    font-size: 14px;
     opacity: 0.9;
     color: white;
 }
@@ -92,29 +196,55 @@
 }
 
 .hero-btn.primary {
-    background-color: #B71C1C;
+    background-color: #F4511E;
     color: white;
-    border: 2px solid #B71C1C;
+    border: 2px solid white;
 }
 
 .hero-btn.primary:hover {
-    background-color: transparent;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(183, 28, 28, 0.3);
+    opacity: .7;
 }
 
 .hero-btn.secondary {
-    background-color: transparent;
+    background-color: #F4511E;
     color: white;
     border: 2px solid white;
 }
 
 .hero-btn.secondary:hover {
-    background-color: white;
-    color: #1E1E1E;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+    opacity: .7;
+}
+
+/* Индикаторы видео (только для мобилок) */
+.video-indicators {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.video-indicator {
+    width: 40px;
+    height: 4px;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.video-indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.video-indicator.active {
+    background: white;
+    width: 60px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* Индикатор скролла */
@@ -123,7 +253,7 @@
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: 3;
     text-align: center;
     color: white;
     animation: bounce 2s infinite;
@@ -136,6 +266,7 @@
     opacity: 0.8;
     text-transform: uppercase;
     letter-spacing: 2px;
+    color: white;
 }
 
 .hero-scroll-icon {
@@ -206,7 +337,6 @@
     }
 }
 
-/* Планшеты и маленькие ноутбуки */
 @media (max-width: 1024px) and (min-width: 769px) {
     .hero-title {
         font-size: 56px;
@@ -214,6 +344,14 @@
     
     .hero-subtitle {
         font-size: 20px;
+    }
+    
+    .promo-highlight {
+        font-size: 24px;
+    }
+    
+    .promo-item {
+        padding: 12px 25px;
     }
     
     .hero-btn {
@@ -225,7 +363,7 @@
 /* Телефоны */
 @media (max-width: 768px) {
     .hero {
-        height: 100vh; /* Чуть меньше на мобилках */
+        height: 100vh;
     }
     
     .hero-title {
@@ -235,7 +373,19 @@
     
     .hero-subtitle {
         font-size: 18px;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
+    }
+    
+    .promo-banners {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .promo-item {
+        width: 100%;
+        max-width: 350px;
+        justify-content: center;
     }
     
     .hero-btn {
@@ -248,19 +398,21 @@
         gap: 15px;
     }
     
-    /* Специально для видео на мобилках */
-    .hero-media {
-        object-fit: cover;
-        object-position: center;
+    .video-indicators {
+        bottom: 100px;
+    }
+    
+    .video-indicator {
+        width: 30px;
+    }
+    
+    .video-indicator.active {
+        width: 50px;
     }
 }
 
 /* Маленькие телефоны */
 @media (max-width: 480px) {
-    .hero {
-        height: 100vh;
-    }
-    
     .hero-title {
         font-size: 32px;
         letter-spacing: 1px;
@@ -268,7 +420,22 @@
     
     .hero-subtitle {
         font-size: 16px;
-        margin-bottom: 25px;
+    }
+    
+    .promo-item {
+        padding: 10px 20px;
+    }
+    
+    .promo-badge {
+        font-size: 28px;
+    }
+    
+    .promo-highlight {
+        font-size: 22px;
+    }
+    
+    .promo-small {
+        font-size: 12px;
     }
     
     .hero-btn {
@@ -276,7 +443,6 @@
         font-size: 14px;
         width: 100%;
         max-width: 280px;
-        text-align: center;
     }
     
     .hero-buttons {
@@ -293,9 +459,22 @@
         width: 25px;
         height: 40px;
     }
+    
+    .video-indicators {
+        gap: 8px;
+        bottom: 90px;
+    }
+    
+    .video-indicator {
+        width: 25px;
+        height: 3px;
+    }
+    
+    .video-indicator.active {
+        width: 40px;
+    }
 }
 
-/* Очень маленькие телефоны */
 @media (max-width: 360px) {
     .hero-title {
         font-size: 28px;
@@ -305,13 +484,19 @@
         font-size: 14px;
     }
     
-    .hero-btn {
-        padding: 10px 20px;
-        font-size: 13px;
+    .promo-item {
+        padding: 8px 15px;
+    }
+    
+    .promo-badge {
+        font-size: 24px;
+    }
+    
+    .promo-highlight {
+        font-size: 20px;
     }
 }
 
-/* Альбомная ориентация на мобилках */
 @media (max-width: 768px) and (orientation: landscape) {
     .hero {
         height: 120vh;
@@ -325,6 +510,10 @@
     .hero-subtitle {
         font-size: 16px;
         margin-bottom: 20px;
+    }
+    
+    .promo-banners {
+        flex-direction: row;
     }
     
     .hero-buttons {

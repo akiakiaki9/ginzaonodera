@@ -623,6 +623,91 @@ const DATA = [
         image: '/images/menu/89.png',
         category: 'drinks',
     },
+    //Чай
+    {
+        id: 90,
+        name: 'Цветочный чай',
+        price: 20000,
+        image: '/images/menu/92.png',
+        category: 'tea',
+    },
+    {
+        id: 91,
+        name: 'Каркаде',
+        price: 30000,
+        image: '/images/menu/93.png',
+        category: 'tea',
+    },
+    {
+        id: 92,
+        name: 'Зеленый чай',
+        price: 20000,
+        image: '/images/menu/94.png',
+        category: 'tea',
+    },
+    {
+        id: 93,
+        name: 'Молочный улун',
+        price: 20000,
+        image: '/images/menu/95.png',
+        category: 'tea',
+    },
+    {
+        id: 94,
+        name: 'Чай с лимоном',
+        price: 25000,
+        image: '/images/menu/96.png',
+        category: 'tea',
+    },
+    {
+        id: 95,
+        name: 'Манго',
+        price: 35000,
+        image: '/images/menu/97.png',
+        category: 'tea',
+    },
+    {
+        id: 96,
+        name: 'Маракуй',
+        price: 35000,
+        image: '/images/menu/98.png',
+        category: 'tea',
+    },
+    {
+        id: 97,
+        name: 'Чай черный',
+        price: 20000,
+        image: '/images/menu/99.png',
+        category: 'tea',
+    },
+    {
+        id: 98,
+        name: 'Чай леcные ягоды',
+        price: 35000,
+        image: '/images/menu/100.png',
+        category: 'tea',
+    },
+    {
+        id: 99,
+        name: 'Чай клюквенный',
+        price: 35000,
+        image: '/images/menu/101.png',
+        category: 'tea',
+    },
+    {
+        id: 100,
+        name: 'Чай малиновый',
+        price: 35000,
+        image: '/images/menu/102.png',
+        category: 'tea',
+    },
+    {
+        id: 101,
+        name: 'Чай клубничный',
+        price: 35000,
+        image: '/images/menu/103.png',
+        category: 'tea',
+    }
 ];
 
 export default DATA;

@@ -1,34 +1,44 @@
+// src/app/menu/page.js
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import {  
-    FaWineBottle, 
-    FaBowlFood,
-    FaBowlRice,
-    FaAngleLeft,
-    FaAngleRight,
-    FaArrowRight
+import {
+    FaCheck
 } from 'react-icons/fa6';
 import { GiSushis } from 'react-icons/gi';
+import { FaUtensils, FaFish, FaLeaf, FaCoffee } from "react-icons/fa";
+import { useCart } from '@/app/context/CartContext';
 import DATA from '@/app/utils/data';
 import './menu.css';
-import { FaUtensils, FaFish, FaLeaf, FaCoffee } from "react-icons/fa";
+import { FaWineBottle } from "react-icons/fa";
+import { FaBowlFood } from "react-icons/fa6";
+import { FaBowlRice } from "react-icons/fa6";
+import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Menu = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [categoryItems, setCategoryItems] = useState([]);
     const [isAnimating, setIsAnimating] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [visibleCount, setVisibleCount] = useState(6);
-    const carouselRef = useRef(null);
-    const itemsGridRef = useRef(null);
+    const [addedItems, setAddedItems] = useState({});
+    const { addToCart } = useCart();
 
-    // Категории ТОЛЬКО из data.js
+    // Для drag-to-scroll
+    const scrollContainerRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(true);
+
+    // Категории
     const categories = [
         { id: 'all', name: 'Всё меню', icon: FaUtensils },
         { id: 'noodles', name: 'Лапша', icon: FaBowlFood },
-        { id: 'rolls', name: 'Горчие Роллы', icon: GiSushis },
+        { id: 'rolls', name: 'Горячие Роллы', icon: GiSushis },
         { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis },
         { id: 'soups', name: 'Супы', icon: FaBowlFood },
         { id: 'hot_dishes', name: 'Горячие блюда', icon: FaFish },
@@ -38,26 +48,8 @@ const Menu = () => {
         { id: 'fried_rice', name: 'Жареный рис', icon: FaBowlRice },
         { id: 'coffee', name: 'Кофе', icon: FaCoffee },
         { id: 'drinks', name: 'Напитки', icon: FaWineBottle },
+        { id: 'tea', name: 'Чай', icon: FaCoffee },
     ];
-
-    useEffect(() => {
-        // Определяем сколько категорий показывать в зависимости от экрана
-        const updateVisibleCount = () => {
-            if (window.innerWidth <= 480) {
-                setVisibleCount(3);
-            } else if (window.innerWidth <= 768) {
-                setVisibleCount(4);
-            } else if (window.innerWidth <= 1024) {
-                setVisibleCount(5);
-            } else {
-                setVisibleCount(6);
-            }
-        };
-
-        updateVisibleCount();
-        window.addEventListener('resize', updateVisibleCount);
-        return () => window.removeEventListener('resize', updateVisibleCount);
-    }, []);
 
     useEffect(() => {
         setIsAnimating(true);
@@ -74,21 +66,111 @@ const Menu = () => {
         }, 300);
     }, [selectedCategory]);
 
-    const nextSlide = () => {
-        if (currentIndex < categories.length - visibleCount) {
-            setCurrentIndex(prev => prev + 1);
+    const handleAddToCart = (item, e) => {
+        e.preventDefault(); // Предотвращаем переход по ссылке
+        e.stopPropagation();
+        
+        addToCart(item, 1);
+        
+        setAddedItems(prev => ({ ...prev, [item.id]: true }));
+        setTimeout(() => {
+            setAddedItems(prev => ({ ...prev, [item.id]: false }));
+        }, 1500);
+    };
+
+    // Проверка видимости стрелок
+    const checkScroll = () => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            setShowLeftArrow(container.scrollLeft > 10);
+            setShowRightArrow(
+                container.scrollLeft < container.scrollWidth - container.clientWidth - 10
+            );
         }
     };
 
-    const prevSlide = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(prev => prev - 1);
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            checkScroll();
+            container.addEventListener('scroll', checkScroll);
+            window.addEventListener('resize', checkScroll);
+
+            return () => {
+                container.removeEventListener('scroll', checkScroll);
+                window.removeEventListener('resize', checkScroll);
+            };
         }
+    }, []);
+
+    // Прокрутка по стрелкам
+    const scroll = (direction) => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            const scrollAmount = 300;
+            container.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // Drag-to-scroll функции
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+        setScrollLeft(scrollContainerRef.current.scrollLeft);
+        scrollContainerRef.current.style.cursor = 'grabbing';
+        scrollContainerRef.current.style.userSelect = 'none';
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+
+        const x = e.pageX - scrollContainerRef.current.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.style.cursor = 'grab';
+            scrollContainerRef.current.style.removeProperty('user-select');
+        }
+    };
+
+    const handleMouseLeave = () => {
+        if (isDragging) {
+            handleMouseUp();
+        }
+    };
+
+    // Touch события для мобилок
+    const handleTouchStart = (e) => {
+        setIsDragging(true);
+        setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
+        setScrollLeft(scrollContainerRef.current.scrollLeft);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+
+        const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleTouchEnd = () => {
+        setIsDragging(false);
     };
 
     const selectCategory = (categoryId) => {
-        setSelectedCategory(categoryId);
-        // Сброс позиции карусели не делаем, чтобы не дергалась
+        if (!isDragging) {
+            setSelectedCategory(categoryId);
+        }
     };
 
     return (
@@ -103,89 +185,111 @@ const Menu = () => {
                     </p>
                 </div>
 
-                {/* Категории КАРУСЕЛЬ */}
-                <div className="carousel-container">
-                    <button 
-                        className={`carousel-btn prev ${currentIndex === 0 ? 'disabled' : ''}`}
-                        onClick={prevSlide}
-                        disabled={currentIndex === 0}
-                    >
-                        <FaAngleLeft />
-                    </button>
-
-                    <div className="carousel-viewport">
-                        <div 
-                            className="carousel-track" 
-                            style={{ 
-                                transform: `translateX(-${currentIndex * (100 / visibleCount)}%)`,
-                                transition: 'transform 0.5s ease'
-                            }}
+                {/* Категории с горизонтальным скроллом */}
+                <div className="categories-wrapper">
+                    {showLeftArrow && (
+                        <button
+                            className="scroll-arrow left"
+                            onClick={() => scroll('left')}
+                            aria-label="Прокрутить влево"
                         >
-                            {categories.map((category) => {
-                                const Icon = category.icon;
-                                const isSelected = selectedCategory === category.id;
+                            <FaAngleLeft />
+                        </button>
+                    )}
 
-                                return (
-                                    <button
-                                        key={category.id}
-                                        className={`carousel-item ${isSelected ? 'active' : ''}`}
-                                        onClick={() => selectCategory(category.id)}
-                                        style={{ flex: `0 0 ${100 / visibleCount}%` }}
-                                    >
-                                        <Icon className="category-icon" />
-                                        <span className="category-name">{category.name}</span>
-                                        {isSelected && <span className="category-active-dot"></span>}
-                                    </button>
-                                );
-                            })}
-                        </div>
+                    <div
+                        className={`categories-scroll ${isDragging ? 'dragging' : ''}`}
+                        ref={scrollContainerRef}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseLeave}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                    >
+                        {categories.map((category) => {
+                            const Icon = category.icon;
+                            const isSelected = selectedCategory === category.id;
+
+                            return (
+                                <button
+                                    key={category.id}
+                                    className={`category-btn ${isSelected ? 'active' : ''}`}
+                                    onClick={() => selectCategory(category.id)}
+                                >
+                                    <Icon className="category-icon" />
+                                    <span className="category-name">{category.name}</span>
+                                    {isSelected && <span className="category-active-dot"></span>}
+                                </button>
+                            );
+                        })}
                     </div>
 
-                    <button 
-                        className={`carousel-btn next ${currentIndex >= categories.length - visibleCount ? 'disabled' : ''}`}
-                        onClick={nextSlide}
-                        disabled={currentIndex >= categories.length - visibleCount}
-                    >
-                        <FaAngleRight />
-                    </button>
+                    {showRightArrow && (
+                        <button
+                            className="scroll-arrow right"
+                            onClick={() => scroll('right')}
+                            aria-label="Прокрутить вправо"
+                        >
+                            <FaAngleRight />
+                        </button>
+                    )}
                 </div>
 
-                {/* Индикаторы карусели */}
-                <div className="carousel-indicators">
-                    {Array.from({ length: Math.ceil(categories.length / visibleCount) }).map((_, idx) => (
+                {/* Индикаторы страниц */}
+                <div className="page-indicators">
+                    {Array.from({ length: Math.ceil(categories.length / 4) }).map((_, idx) => (
                         <button
                             key={idx}
-                            className={`indicator ${Math.floor(currentIndex / visibleCount) === idx ? 'active' : ''}`}
-                            onClick={() => setCurrentIndex(idx * visibleCount)}
+                            className={`page-dot ${Math.floor(scrollContainerRef.current?.scrollLeft / 300) === idx ? 'active' : ''}`}
+                            onClick={() => {
+                                if (scrollContainerRef.current) {
+                                    scrollContainerRef.current.scrollTo({
+                                        left: idx * 300,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }}
                         />
                     ))}
                 </div>
 
                 {/* Превью товаров категории */}
-                <div className={`category-items ${isAnimating ? 'fade-out' : 'fade-in'}`} ref={itemsGridRef}>
+                <div className={`category-items ${isAnimating ? 'fade-out' : 'fade-in'}`}>
                     {categoryItems.length > 0 ? (
                         <div className="items-grid">
                             {categoryItems.map((item) => (
-                                <Link
-                                    href={`/product/${item.id}`}
-                                    key={item.id}
-                                    className="item-card"
-                                >
-                                    <div className="item-image">
-                                        <img 
-                                            src={item.image} 
-                                            alt={item.name}
-                                            className="item-img"
-                                        />
-                                        {item.isTop && (
-                                            <span className="item-badge">Хит</span>
-                                        )}
-                                    </div>
-                                    <div className="item-info">
-                                        <h3 className="item-name">{item.name}</h3>
-                                        <div className="item-price">{item.price.toLocaleString()} сум</div>
-                                    </div>
-                                </Link>
+                                <div key={item.id} className="item-card-wrapper">
+                                    <Link
+                                        href={`/product/${item.id}`}
+                                        className="item-card"
+                                    >
+                                        <div className="item-image">
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="item-img"
+                                            />
+                                            {item.isTop && (
+                                                <span className="item-badge">Хит</span>
+                                            )}
+                                        </div>
+                                        <div className="item-info">
+                                            <h3 className="item-name">{item.name}</h3>
+                                            <div className="item-price-row">
+                                                <span className="item-price">{item.price.toLocaleString()} сум</span>
+                                                <button 
+                                                    className={`item-cart-btn ${addedItems[item.id] ? 'added' : ''}`}
+                                                    onClick={(e) => handleAddToCart(item, e)}
+                                                    aria-label="Добавить в корзину"
+                                                >
+                                                    {addedItems[item.id] ? <FaCheck /> : <FaShoppingCart />}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
                             ))}
                         </div>
                     ) : (
