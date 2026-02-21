@@ -1,6 +1,6 @@
 .cart-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #fcfcfc 0%, #ffffff 100%);
+    background-color: #F4511E; /* Оранжевый фон */
 }
 
 /* Hero секция */
@@ -23,7 +23,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.373));
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.225), rgba(0, 0, 0, 0.5));
     z-index: 1;
 }
 
@@ -39,6 +39,7 @@
     font-weight: 700;
     margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
 .breadcrumbs {
@@ -62,16 +63,19 @@
 .breadcrumb-link:hover {
     opacity: 1;
     transform: translateX(-3px);
+    color: white;
 }
 
 .breadcrumb-separator {
     font-size: 12px;
     opacity: 0.7;
+    color: white;
 }
 
 .breadcrumb-current {
     opacity: 0.9;
     font-weight: 500;
+    color: white;
 }
 
 .container {
@@ -84,17 +88,18 @@
 .empty-cart {
     text-align: center;
     padding: 80px 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый фон */
     border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     max-width: 500px;
     margin: 0 auto;
+    backdrop-filter: blur(10px);
 }
 
 .empty-cart-icon {
     font-size: 100px;
-    color: #B71C1C;
+    color: white; /* Белая иконка */
     margin-bottom: 30px;
     animation: emptyCartBounce 2s infinite;
 }
@@ -113,13 +118,13 @@
 
 .empty-cart-title {
     font-size: 32px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 15px;
 }
 
 .empty-cart-text {
     font-size: 16px;
-    color: #5F5F5F;
+    color: #FFE0B2; /* Светло-оранжевый */
     margin-bottom: 30px;
 }
 
@@ -128,19 +133,22 @@
     align-items: center;
     gap: 10px;
     padding: 16px 40px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     text-decoration: none;
     border-radius: 50px;
     font-size: 18px;
     font-weight: 500;
     transition: all 0.3s ease;
+    border: 2px solid white;
 }
 
 .empty-cart-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
     gap: 15px;
+    background: transparent;
+    color: white;
 }
 
 /* Основной контент корзины */
@@ -153,19 +161,20 @@
 
 /* Секция с товарами */
 .cart-items-section {
-    background: white;
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый фон */
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .section-title {
     font-size: 24px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #E8E8E8;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Белая граница */
 }
 
 .cart-items {
@@ -181,16 +190,16 @@
     gap: 20px;
     align-items: center;
     padding: 20px;
-    background: #F9F9F9;
+    background: rgba(255, 255, 255, 0.05); /* Полупрозрачный белый */
     border-radius: 16px;
     transition: all 0.3s ease;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
 }
 
 .cart-item:hover {
-    background: white;
-    border-color: #E8E8E8;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.15); /* Более непрозрачный при наведении */
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transform: translateX(5px);
 }
 
@@ -199,12 +208,14 @@
     height: 100px;
     border-radius: 12px;
     overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .cart-item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(0.95);
 }
 
 .cart-item-info {
@@ -214,13 +225,13 @@
 .cart-item-name {
     font-size: 18px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 8px;
 }
 
 .cart-item-price {
     font-size: 16px;
-    color: #B71C1C;
+    color: #FFE0B2; /* Светло-оранжевый */
     font-weight: 500;
 }
 
@@ -228,10 +239,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     padding: 5px;
     border-radius: 40px;
-    border: 1px solid #E8E8E8;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .quantity-btn {
@@ -240,7 +251,7 @@
     border-radius: 50%;
     border: none;
     background: transparent;
-    color: #B71C1C;
+    color: white; /* Белый текст */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -250,8 +261,8 @@
 }
 
 .quantity-btn:hover {
-    background: #B71C1C;
-    color: white;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     transform: scale(1.1);
 }
 
@@ -260,12 +271,13 @@
     font-weight: 600;
     min-width: 30px;
     text-align: center;
+    color: white; /* Белый текст */
 }
 
 .cart-item-total {
     font-size: 18px;
     font-weight: 700;
-    color: #B71C1C;
+    color: white; /* Белый текст */
     min-width: 120px;
     text-align: right;
 }
@@ -274,9 +286,9 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: none;
+    border: 2px solid transparent;
     background: transparent;
-    color: #999;
+    color: rgba(255, 255, 255, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -286,9 +298,10 @@
 }
 
 .cart-item-remove:hover {
-    background: #B71C1C;
-    color: white;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     transform: rotate(90deg);
+    border-color: white;
 }
 
 /* Действия с корзиной */
@@ -297,7 +310,7 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 20px;
-    border-top: 2px solid #E8E8E8;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .clear-cart-btn {
@@ -306,8 +319,8 @@
     gap: 8px;
     padding: 12px 24px;
     background: transparent;
-    color: #B71C1C;
-    border: 2px solid #B71C1C;
+    color: white; /* Белый текст */
+    border: 2px solid white; /* Белая граница */
     border-radius: 40px;
     font-size: 14px;
     font-weight: 500;
@@ -316,8 +329,8 @@
 }
 
 .clear-cart-btn:hover {
-    background: #B71C1C;
-    color: white;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     transform: translateY(-2px);
 }
 
@@ -326,18 +339,21 @@
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: #F5F5F5;
-    color: #1E1E1E;
+    background: rgba(255, 255, 255, 0.1);
+    color: white; /* Белый текст */
     text-decoration: none;
     border-radius: 40px;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .continue-shopping:hover {
-    background: #E8E8E8;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     transform: translateX(-5px);
+    border-color: white;
 }
 
 /* Секция с итогом */
@@ -347,19 +363,20 @@
 }
 
 .summary-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый фон */
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .summary-title {
     font-size: 22px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #E8E8E8;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .summary-items {
@@ -374,12 +391,12 @@
 }
 
 .summary-items::-webkit-scrollbar-track {
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
 
 .summary-items::-webkit-scrollbar-thumb {
-    background: #B71C1C;
+    background: white; /* Белый скролл */
     border-radius: 10px;
 }
 
@@ -388,7 +405,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px dashed #E8E8E8;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
 .summary-item:last-child {
@@ -397,7 +414,7 @@
 
 .summary-item-name {
     font-size: 14px;
-    color: #5F5F5F;
+    color: #FFE0B2; /* Светло-оранжевый */
     flex: 1;
     padding-right: 10px;
 }
@@ -405,7 +422,7 @@
 .summary-item-price {
     font-size: 14px;
     font-weight: 600;
-    color: #B71C1C;
+    color: white; /* Белый текст */
 }
 
 .summary-total {
@@ -413,24 +430,25 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
-    border-top: 2px solid #E8E8E8;
-    border-bottom: 2px solid #E8E8E8;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     margin-bottom: 25px;
     font-size: 20px;
     font-weight: 700;
+    color: white; /* Белый текст */
 }
 
 .total-price {
-    color: #B71C1C;
+    color: white; /* Белый текст */
     font-size: 24px;
 }
 
 .checkout-btn {
     width: 100%;
     padding: 18px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
-    border: none;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
+    border: 2px solid white;
     border-radius: 50px;
     font-size: 18px;
     font-weight: 600;
@@ -445,13 +463,15 @@
 
 .checkout-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
     gap: 15px;
+    background: transparent;
+    color: white;
 }
 
 .checkout-info {
     font-size: 12px;
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
     text-align: center;
     line-height: 1.5;
 }

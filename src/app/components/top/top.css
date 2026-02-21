@@ -2,7 +2,7 @@
 
 .best-offers {
     padding: 80px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background-color: #FF5722; /* ЯРКИЙ ОРАНЖЕВЫЙ */
     position: relative;
     overflow: hidden;
 }
@@ -14,7 +14,7 @@
     right: -50%;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(183, 28, 28, 0.03) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
     border-radius: 50%;
     z-index: 0;
 }
@@ -34,7 +34,7 @@
 
 .best-offers-title {
     font-size: 42px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -43,7 +43,7 @@
 }
 
 .best-offers-title-icon {
-    color: #F4511E;
+    color: white; /* Белая иконка */
     font-size: 36px;
     animation: starPulse 2s infinite;
 }
@@ -61,7 +61,7 @@
 
 .best-offers-subtitle {
     font-size: 18px;
-    color: #5F5F5F;
+    color: #FFF3E0; /* Очень светлый оранжевый */
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -75,43 +75,46 @@
 }
 
 .best-offer-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(5px);
 }
 
 .best-offer-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(183, 28, 28, 0.15);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .best-offer-badge {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white; /* Белый фон */
+    color: #FF5722; /* Яркий оранжевый текст */
     padding: 8px 16px;
     border-radius: 30px;
     font-size: 14px;
     font-weight: bold;
     z-index: 2;
-    box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
     animation: badgeGlow 2s infinite;
 }
 
 @keyframes badgeGlow {
     0%, 100% {
-        box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3);
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
     }
     50% {
-        box-shadow: 0 4px 20px rgba(244, 81, 30, 0.5);
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
     }
 }
 
@@ -121,10 +124,11 @@
     height: 250px; /* Фиксированная высота */
     overflow: hidden;
     position: relative;
-    background-color: #f5f5f5; /* Фон пока грузится */
+    background-color: rgba(255, 255, 255, 0.05); /* Фон пока грузится */
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .best-offer-image::after {
@@ -134,7 +138,7 @@
     left: 0;
     right: 0;
     height: 50%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.05), transparent);
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.1), transparent);
     pointer-events: none;
     z-index: 1;
 }
@@ -145,12 +149,13 @@
     object-fit: cover; /* ВАЖНО: обрезает фото чтобы заполнить контейнер */
     object-position: center; /* Центрирует изображение */
     transition: transform 0.5s ease;
+    filter: brightness(0.95);
 }
 
 /* Если фото портретное (высокое) - показываем целиком с белыми полосами */
 .best-offer-image.img-contain img {
     object-fit: contain;
-    background-color: #f5f5f5;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .best-offer-card:hover .best-offer-image img {
@@ -159,7 +164,7 @@
 
 .best-offer-content {
     padding: 25px;
-    background: white;
+    background: transparent;
     position: relative;
     flex: 1;
     display: flex;
@@ -169,7 +174,7 @@
 .best-offer-name {
     font-size: 18px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 15px;
     line-height: 1.4;
     /* Ограничиваем название 2 строками */
@@ -180,10 +185,21 @@
     min-height: 50px;
 }
 
+/* Ссылка на название */
+.best-offer-name-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.best-offer-name-link:hover .best-offer-name {
+    color: #FFF3E0; /* Светло-оранжевый при наведении */
+}
+
 .best-offer-price {
     font-size: 24px;
     font-weight: bold;
-    color: #B71C1C;
+    color: white; /* Белый текст */
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -193,7 +209,7 @@
 .best-offer-price::after {
     content: 'сум';
     font-size: 14px;
-    color: #5F5F5F;
+    color: #FFF3E0; /* Светло-оранжевый */
     font-weight: normal;
     margin-left: 5px;
 }
@@ -221,30 +237,112 @@
 
 .best-offer-btn.details {
     background-color: transparent;
-    color: #B71C1C;
-    border: 2px solid #B71C1C;
+    color: white; /* Белый текст */
+    border: 2px solid white; /* Белая граница */
     flex: 1;
 }
 
 .best-offer-btn.details:hover {
-    background-color: #B71C1C;
-    color: white;
+    background-color: white; /* Белый фон */
+    color: #FF5722; /* Яркий оранжевый текст */
     transform: translateY(-2px);
 }
 
 .best-offer-btn.cart {
-    background-color: #B71C1C;
-    color: white;
-    border: 2px solid #B71C1C;
+    background-color: white; /* Белый фон */
+    color: #FF5722; /* Яркий оранжевый текст */
+    border: 2px solid white;
     width: 50px;
     padding: 12px;
     font-size: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .best-offer-btn.cart:hover {
-    background-color: #8B0000;
-    border-color: #8B0000;
-    transform: translateY(-2px) rotate(360deg);
+    background-color: transparent;
+    color: white; /* Белый текст */
+    border-color: white;
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.best-offer-btn.cart:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* Анимация для кнопки при добавлении */
+.best-offer-btn.cart.added {
+    background-color: white;
+    color: #4CAF50; /* Зеленый текст */
+    border-color: white;
+    animation: addedPulse 0.5s ease;
+}
+
+@keyframes addedPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Анимация для иконки корзины */
+@keyframes cartBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.best-offer-btn.cart:not(.added):hover svg {
+    animation: cartBounce 0.5s ease infinite;
+}
+
+/* Всплывающее уведомление */
+.added-notification {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white; /* Белый фон */
+    color: #4CAF50; /* Зеленый текст */
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    animation: notificationSlide 2s ease forwards;
+    z-index: 10;
+    pointer-events: none;
+    border: 2px solid #4CAF50;
+}
+
+@keyframes notificationSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    85% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
 }
 
 .best-offers-footer {
@@ -255,19 +353,22 @@
 .best-offers-all-btn {
     display: inline-block;
     padding: 16px 40px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white; /* Белый фон */
+    color: #FF5722; /* Яркий оранжевый текст */
     text-decoration: none;
     border-radius: 50px;
     font-size: 18px;
     font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
 }
 
 .best-offers-all-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+    background: transparent;
+    color: white;
 }
 
 /* ========== АДАПТИВНОСТЬ ========== */
@@ -340,6 +441,10 @@
         padding: 10px;
         font-size: 16px;
     }
+    
+    .best-offer-btn.cart:hover {
+        transform: translateY(-2px) scale(1.05);
+    }
 }
 
 /* Мобильные телефоны */
@@ -407,9 +512,15 @@
     }
     
     .best-offer-btn.cart {
-        width: 40px;
+        width: 45px;
         padding: 8px;
-        font-size: 15px;
+        font-size: 16px;
+    }
+    
+    .added-notification {
+        bottom: 70px;
+        font-size: 11px;
+        padding: 6px 12px;
     }
     
     .best-offers-all-btn {
@@ -438,6 +549,12 @@
     .best-offer-price {
         font-size: 16px;
     }
+    
+    .best-offer-btn.cart {
+        width: 40px;
+        padding: 8px;
+        font-size: 15px;
+    }
 }
 
 /* Анимация появления карточек */
@@ -462,142 +579,19 @@
     }
 }
 
-/* Для фото с разными пропорциями можно добавить классы */
+/* Для фото с разными пропорциями */
 .best-offer-image.portrait img {
     object-fit: contain;
-    background-color: #f5f5f5;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .best-offer-image.landscape img {
     object-fit: cover;
 }
 
-/* Добавьте эти стили в конец файла best-offers.css */
-
 /* Ссылка на изображение */
 .best-offer-image-link {
     display: block;
     text-decoration: none;
     cursor: pointer;
-}
-
-/* Ссылка на название */
-.best-offer-name-link {
-    text-decoration: none;
-    color: inherit;
-    display: inline-block;
-}
-
-.best-offer-name-link:hover .best-offer-name {
-    color: #B71C1C;
-}
-
-/* Обновленные стили для кнопки корзины */
-.best-offer-btn.cart {
-    background-color: #B71C1C;
-    color: white;
-    border: 2px solid #B71C1C;
-    width: 50px;
-    padding: 12px;
-    font-size: 18px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.best-offer-btn.cart:hover {
-    background-color: #8B0000;
-    border-color: #8B0000;
-    transform: translateY(-2px) scale(1.1);
-    box-shadow: 0 5px 15px rgba(183, 28, 28, 0.3);
-}
-
-.best-offer-btn.cart:active {
-    transform: translateY(0) scale(0.95);
-}
-
-/* Анимация для кнопки при добавлении */
-.best-offer-btn.cart.added {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
-    animation: addedPulse 0.5s ease;
-}
-
-@keyframes addedPulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Всплывающее уведомление */
-.added-notification {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 500;
-    white-space: nowrap;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-    animation: notificationSlide 2s ease forwards;
-    z-index: 10;
-    pointer-events: none;
-}
-
-@keyframes notificationSlide {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(10px);
-    }
-    15% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-    85% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-10px);
-    }
-}
-
-/* Анимация для иконки корзины */
-@keyframes cartBounce {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-.best-offer-btn.cart:not(.added):hover svg {
-    animation: cartBounce 0.5s ease infinite;
-}
-
-/* Адаптивность для мобильных */
-@media (max-width: 480px) {
-    .best-offer-btn.cart {
-        width: 45px;
-        padding: 10px;
-        font-size: 16px;
-    }
-    
-    .added-notification {
-        bottom: 70px;
-        font-size: 11px;
-        padding: 6px 12px;
-    }
 }

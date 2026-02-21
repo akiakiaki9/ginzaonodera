@@ -2,7 +2,7 @@
 
 .values-section {
     padding: 80px 0 60px;
-    background: linear-gradient(135deg, #fff 0%, #fcfcfc 100%);
+    background-color: #FF5722; /* ЯРКИЙ ОРАНЖЕВЫЙ */
     position: relative;
     overflow: hidden;
     min-height: auto;
@@ -19,8 +19,8 @@
     bottom: 0;
     background-image: 
         repeating-linear-gradient(45deg, 
-            rgba(183, 28, 28, 0.02) 0px, 
-            rgba(183, 28, 28, 0.02) 2px,
+            rgba(255, 255, 255, 0.1) 0px, 
+            rgba(255, 255, 255, 0.1) 2px,
             transparent 2px, 
             transparent 10px
         );
@@ -45,8 +45,8 @@
     width: 12px;
     height: 12px;
     background: radial-gradient(circle at 30% 30%, 
-        rgba(244, 81, 30, 0.25), 
-        rgba(183, 28, 28, 0.15)
+        rgba(255, 255, 255, 0.25), 
+        rgba(255, 255, 255, 0.15)
     );
     border-radius: 150% 0 150% 0;
     transform: rotate(45deg);
@@ -96,7 +96,7 @@
     display: inline-block;
     font-size: 13px;
     letter-spacing: 3px;
-    color: #B71C1C;
+    color: #FFF3E0; /* Светло-оранжевый */
     margin-bottom: 10px;
     position: relative;
     padding: 0 15px;
@@ -109,7 +109,7 @@
     top: 50%;
     width: 20px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #B71C1C, transparent);
+    background: linear-gradient(90deg, transparent, white, transparent);
 }
 
 .values-subtitle-en::before {
@@ -135,14 +135,14 @@
 
 .values-title {
     font-size: 42px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 15px;
     font-weight: 700;
     line-height: 1.2;
 }
 
 .title-highlight {
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    background: linear-gradient(135deg, #FFFFFF, #FFF3E0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -157,7 +157,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, #B71C1C, #F4511E, transparent);
+    background: linear-gradient(90deg, white, #FFF3E0, transparent);
     transform: scaleX(0);
     transform-origin: left;
     animation: underlineReveal 0.8s ease 0.5s forwards;
@@ -171,7 +171,7 @@
 
 .values-subtitle {
     font-size: 16px;
-    color: #5F5F5F;
+    color: #FFF3E0; /* Светло-оранжевый */
     max-width: 500px;
     margin: 0 auto;
 }
@@ -184,7 +184,7 @@
 }
 
 .value-card {
-    height: 280px; /* Уменьшили с 350px */
+    height: 280px;
     cursor: pointer;
     opacity: 0;
     transform: translateY(40px) rotateX(5deg);
@@ -208,7 +208,7 @@
     text-align: center;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
 }
 
@@ -230,8 +230,9 @@
 }
 
 .value-front {
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
     overflow: hidden;
 }
 
@@ -245,7 +246,7 @@
     background: linear-gradient(
         45deg,
         transparent,
-        rgba(183, 28, 28, 0.08),
+        rgba(255, 255, 255, 0.15),
         transparent
     );
     transform: rotate(45deg);
@@ -262,8 +263,8 @@
 }
 
 .value-back {
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white; /* Белый фон */
+    color: #FF5722; /* Яркий оранжевый текст */
     transform: rotateY(180deg);
     position: relative;
     overflow: hidden;
@@ -277,6 +278,7 @@
     font-size: 100px;
     opacity: 0.1;
     transform: rotate(15deg);
+    color: #FF5722;
 }
 
 .value-back-decoration {
@@ -285,15 +287,15 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 70%);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 87, 34, 0.1), transparent 70%);
     pointer-events: none;
 }
 
 .value-icon-wrapper {
-    width: 90px; /* Уменьшили со 120px */
-    height: 90px; /* Уменьшили со 120px */
-    margin-bottom: 15px; /* Уменьшили с 25px */
-    background: linear-gradient(135deg, rgba(183,28,28,0.1), rgba(244,81,30,0.1));
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -301,6 +303,7 @@
     transition: all 0.4s ease;
     position: relative;
     animation: floatIcon 3s ease-in-out infinite;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 @keyframes floatIcon {
@@ -314,6 +317,7 @@
 
 .value-card:hover .value-icon-wrapper {
     animation: spinIcon 0.8s ease;
+    background: white;
 }
 
 @keyframes spinIcon {
@@ -329,32 +333,32 @@
 }
 
 .value-icon {
-    font-size: 45px; /* Уменьшили с 60px */
-    color: #B71C1C;
+    font-size: 45px;
+    color: white; /* Белая иконка */
     transition: all 0.4s ease;
 }
 
 .value-card:hover .value-icon {
-    color: #F4511E;
-    filter: drop-shadow(0 3px 10px rgba(183,28,28,0.3));
+    color: #FF5722; /* Яркий оранжевый при наведении */
+    filter: drop-shadow(0 3px 10px rgba(255, 255, 255, 0.3));
 }
 
 .value-title {
-    font-size: 18px; /* Уменьшили с 22px */
+    font-size: 18px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 8px;
     position: relative;
     z-index: 2;
 }
 
 .value-number {
-    font-size: 70px; /* Уменьшили со 100px */
+    font-size: 70px;
     font-weight: 800;
     position: absolute;
     bottom: 5px;
     right: 15px;
-    color: rgba(183,28,28,0.05);
+    color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
     line-height: 1;
     z-index: 1;
     transition: all 0.4s ease;
@@ -362,17 +366,19 @@
 
 .value-card:hover .value-number {
     transform: scale(1.15);
-    color: rgba(183,28,28,0.1);
+    color: rgba(255, 255, 255, 0.2);
 }
 
 .value-description {
-    font-size: 15px; /* Уменьшили с 18px */
+    font-size: 15px;
     line-height: 1.5;
     margin: 0;
     position: relative;
     z-index: 2;
     text-shadow: 0 1px 2px rgba(0,0,0,0.15);
     max-width: 220px;
+    color: #FF5722; /* Яркий оранжевый текст на обратной стороне */
+    font-weight: 500;
 }
 
 /* Декоративная волна */
@@ -380,6 +386,8 @@
     margin-top: 40px;
     opacity: 0.2;
     animation: waveMove 12s linear infinite;
+    color: white;
+    fill: white;
 }
 
 @keyframes waveMove {
@@ -492,11 +500,11 @@
     }
     
     .value-card {
-        height: 220px; /* Еще меньше на мобилках */
+        height: 220px;
     }
     
     .value-card-inner {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
     
     .value-front, .value-back {
@@ -563,3 +571,10 @@
         font-size: 45px;
     }
 }
+
+/* Анимация для лепестков - добавляем разные вариации */
+.petal:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+.petal:nth-child(2) { left: 30%; animation-duration: 10s; animation-delay: 2s; }
+.petal:nth-child(3) { left: 50%; animation-duration: 7s; animation-delay: 1s; }
+.petal:nth-child(4) { left: 70%; animation-duration: 12s; animation-delay: 3s; }
+.petal:nth-child(5) { left: 90%; animation-duration: 9s; animation-delay: 0.5s; }

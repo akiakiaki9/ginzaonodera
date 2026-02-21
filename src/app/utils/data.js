@@ -111,14 +111,14 @@ const DATA = [
         id: 16,
         name: 'Тори рамен',
         price: 50000,
-        image: '/images/menu/16.png',
+        image: '/images/menu/105.png',
         category: 'soups',
     },
     {
         id: 17,
         name: 'Рисовая лапша с морепродуктами',
         price: 120000,
-        image: '/images/menu/17.png',
+        image: '/images/menu/104.png',
         category: 'soups',
     },
     {

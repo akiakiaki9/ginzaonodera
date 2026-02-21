@@ -4,7 +4,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
@@ -29,11 +28,13 @@
     max-width: 900px;
     max-height: 90vh;
     overflow-y: auto;
-    background: white;
+    background: rgba(244, 81, 30, 0.8); /* Оранжевый оверлей */
     border-radius: 30px;
     padding: 40px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
     animation: modalAppear 0.5s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 @keyframes modalAppear {
@@ -55,9 +56,9 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: none;
-    background: #F5F5F5;
-    color: #1E1E1E;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.1);
+    color: white; /* Белая иконка */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,9 +69,10 @@
 }
 
 .modal-close:hover {
-    background: #B71C1C;
-    color: white;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     transform: rotate(90deg);
+    border-color: white;
 }
 
 .modal-header {
@@ -80,7 +82,7 @@
 
 .modal-icon {
     font-size: 50px;
-    color: #B71C1C;
+    color: white; /* Белая иконка */
     margin-bottom: 15px;
     animation: iconBounce 2s infinite;
 }
@@ -99,31 +101,31 @@
 
 .modal-title {
     font-size: 32px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 10px;
 }
 
 .modal-subtitle {
     font-size: 16px;
-    color: #5F5F5F;
+    color: #FFE0B2; /* Светло-оранжевый */
 }
 
 /* Сводка заказа */
 .order-summary {
-    background: linear-gradient(135deg, #F9F9F9, #FFFFFF);
+    background: rgba(255, 255, 255, 0.05); /* Полупрозрачный белый */
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 30px;
-    border: 1px solid #E8E8E8;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .summary-label {
     font-size: 18px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #E8E8E8;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .order-items {
@@ -138,12 +140,12 @@
 }
 
 .order-items::-webkit-scrollbar-track {
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
 
 .order-items::-webkit-scrollbar-thumb {
-    background: #B71C1C;
+    background: white; /* Белый скролл */
     border-radius: 10px;
 }
 
@@ -152,7 +154,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 0;
-    border-bottom: 1px dashed #E8E8E8;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
 .order-item:last-child {
@@ -161,7 +163,7 @@
 
 .order-item-name {
     font-size: 14px;
-    color: #5F5F5F;
+    color: #FFE0B2; /* Светло-оранжевый */
     flex: 1;
     padding-right: 10px;
 }
@@ -169,7 +171,7 @@
 .order-item-price {
     font-size: 14px;
     font-weight: 600;
-    color: #B71C1C;
+    color: white; /* Белый текст */
 }
 
 .order-total {
@@ -177,14 +179,14 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 15px;
-    border-top: 2px solid #E8E8E8;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
     font-size: 18px;
     font-weight: 700;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
 }
 
 .total-amount {
-    color: #B71C1C;
+    color: white; /* Белый текст */
     font-size: 22px;
 }
 
@@ -197,22 +199,24 @@
 }
 
 .order-option {
-    background: #F9F9F9;
+    background: rgba(255, 255, 255, 0.05); /* Полупрозрачный белый */
     border-radius: 20px;
     padding: 25px;
     transition: all 0.3s ease;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
+    backdrop-filter: blur(5px);
 }
 
 .order-option:hover {
-    background: white;
-    border-color: #E8E8E8;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.15); /* Более непрозрачный */
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px);
 }
 
 .phone-option {
-    background: linear-gradient(135deg, #FFF5F5, #FFF);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .option-header {
@@ -221,12 +225,12 @@
     gap: 10px;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #E8E8E8;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .option-icon {
     font-size: 24px;
-    color: #B71C1C;
+    color: white; /* Белая иконка */
     animation: iconPulse 2s infinite;
 }
 
@@ -245,7 +249,7 @@
 .option-title {
     font-size: 20px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
 }
 
 /* Форма заказа */
@@ -264,7 +268,7 @@
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #999;
+    color: rgba(255, 255, 255, 0.5); /* Полупрозрачный белый */
     font-size: 16px;
     transition: color 0.3s ease;
 }
@@ -272,28 +276,34 @@
 .form-input {
     width: 100%;
     padding: 15px 15px 15px 45px;
-    border: 2px solid #E8E8E8;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
     font-size: 15px;
     outline: none;
     transition: all 0.3s ease;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
+    color: white; /* Белый текст */
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .form-input:focus {
-    border-color: #B71C1C;
-    box-shadow: 0 0 0 4px rgba(183, 28, 28, 0.1);
+    border-color: white; /* Белая граница */
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
-.form-input:focus+.form-icon {
-    color: #B71C1C;
+.form-input:focus + .form-icon {
+    color: white; /* Белая иконка */
 }
 
 .submit-btn {
     padding: 15px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
-    border: none;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
+    border: 2px solid white;
     border-radius: 50px;
     font-size: 16px;
     font-weight: 600;
@@ -304,12 +314,17 @@
 
 .submit-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: white;
 }
 
 .submit-btn:disabled {
-    opacity: 0.7;
+    opacity: 0.5;
     cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.5);
+    color: rgba(244, 81, 30, 0.5);
+    border-color: transparent;
 }
 
 /* Телефонная опция */
@@ -319,7 +334,7 @@
 
 .phone-text {
     font-size: 15px;
-    color: #5F5F5F;
+    color: #FFE0B2; /* Светло-оранжевый */
     line-height: 1.6;
     margin-bottom: 25px;
 }
@@ -329,20 +344,23 @@
     align-items: center;
     gap: 10px;
     padding: 15px 30px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     text-decoration: none;
     border-radius: 50px;
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 15px;
     transition: all 0.3s ease;
+    border: 2px solid white;
 }
 
 .phone-link:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
     gap: 15px;
+    background: transparent;
+    color: white;
 }
 
 .phone-icon {
@@ -375,29 +393,31 @@
 
 .phone-note {
     font-size: 13px;
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
     font-style: italic;
 }
 
 /* Сообщения */
 .success-message {
     padding: 15px;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
+    background: white; /* Белый фон */
+    color: #4CAF50; /* Зеленый текст */
     border-radius: 12px;
     text-align: center;
     font-size: 14px;
     animation: messageAppear 0.3s ease;
+    border: 2px solid #4CAF50;
 }
 
 .error-message {
     padding: 15px;
-    background: linear-gradient(135deg, #f44336, #d32f2f);
-    color: white;
+    background: white; /* Белый фон */
+    color: #f44336; /* Красный текст */
     border-radius: 12px;
     text-align: center;
     font-size: 14px;
     animation: messageAppear 0.3s ease;
+    border: 2px solid #f44336;
 }
 
 @keyframes messageAppear {
@@ -416,12 +436,12 @@
 .modal-footer {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid #E8E8E8;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .footer-note {
     font-size: 12px;
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Адаптивность */
@@ -497,5 +517,438 @@
         font-size: 16px;
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* Стили для способов оплаты */
+.payment-methods {
+    margin-bottom: 25px;
+}
+
+.payment-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.payment-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.payment-option {
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.payment-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.payment-option.active {
+    background: white;
+    border-color: white;
+    color: #F4511E;
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+}
+
+.payment-icon {
+    font-size: 24px;
+}
+
+.payment-label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.payment-check {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 20px;
+    color: #4CAF50;
+    background: white;
+    border-radius: 50%;
+    animation: checkAppear 0.3s ease;
+}
+
+@keyframes checkAppear {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Детали Click */
+.click-details {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.click-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.click-logo {
+    font-size: 28px;
+    color: white;
+}
+
+.click-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.click-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.click-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.click-card-row:last-child {
+    border-bottom: none;
+}
+
+.click-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.click-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+}
+
+.click-card-number {
+    font-family: monospace;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.click-note {
+    font-size: 14px;
+    color: #FFE0B2;
+    margin-bottom: 15px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Загрузка файла */
+.file-upload-section {
+    margin-top: 20px;
+}
+
+.file-upload-area {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.file-upload-area:hover {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.file-upload-area.has-file {
+    border-style: solid;
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+    padding: 15px;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    animation: uploadFloat 2s infinite;
+}
+
+@keyframes uploadFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.upload-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.upload-main {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+}
+
+.upload-hint {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Превью файла */
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.preview-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.file-icon {
+    width: 50px;
+    height: 50px;
+    background: white;
+    color: #F4511E;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.file-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.file-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    word-break: break-word;
+}
+
+.file-size {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.remove-file {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #f44336;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.remove-file:hover {
+    background: #f44336;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Альтернативный способ - позвонить */
+.phone-alternative {
+    margin: 25px 0 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.phone-alternative-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.phone-alternative-icon {
+    font-size: 24px;
+    color: white;
+    animation: phoneRing 2s infinite;
+}
+
+.phone-alternative-text {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.phone-alternative-label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.phone-alternative-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.phone-alternative-number:hover {
+    background: white;
+    color: #F4511E;
+    transform: scale(1.05);
+    border-color: white;
+}
+
+/* Обновленная кнопка отправки */
+.submit-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    border-color: transparent;
+}
+
+/* Иконка успеха */
+.success-icon {
+    font-size: 20px;
+    color: #4CAF50;
+    animation: successSpin 0.5s ease;
+}
+
+@keyframes successSpin {
+    from {
+        transform: rotate(0deg) scale(0);
+    }
+    to {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .payment-options {
+        flex-direction: column;
+    }
+    
+    .payment-option {
+        width: 100%;
+    }
+    
+    .click-card-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .phone-alternative-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .phone-alternative-text {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .file-preview {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .click-card-number {
+        font-size: 16px;
+    }
+    
+    .phone-alternative-number {
+        font-size: 20px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .file-preview {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .file-info {
+        text-align: center;
     }
 }

@@ -1,6 +1,6 @@
 .about-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #fff 0%, #fcfcfc 100%);
+    background-color: #FF5722; /* ЯРКИЙ ОРАНЖЕВЫЙ */
     overflow-x: hidden;
 }
 
@@ -23,7 +23,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.373));
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.373)); /* ОРИГИНАЛЬНЫЙ ЧЕРНЫЙ ГРАДИЕНТ */
     z-index: 1;
     animation: overlayAppear 1s ease;
 }
@@ -64,6 +64,7 @@
     margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     letter-spacing: 2px;
+    color: white;
 }
 
 .breadcrumbs {
@@ -72,6 +73,7 @@
     justify-content: center;
     gap: 12px;
     font-size: 16px;
+    flex-wrap: wrap;
 }
 
 .breadcrumb-link {
@@ -90,20 +92,24 @@
     opacity: 1;
     background: rgba(255, 255, 255, 0.1);
     transform: translateX(-3px);
+    color: white;
 }
 
 .breadcrumb-icon {
     font-size: 14px;
+    color: white;
 }
 
 .breadcrumb-separator {
     font-size: 12px;
     opacity: 0.7;
+    color: white;
 }
 
 .breadcrumb-current {
     opacity: 0.9;
     font-weight: 500;
+    color: white;
 }
 
 .container {
@@ -123,6 +129,11 @@
 /* Левая колонка с текстом */
 .about-text {
     animation: slideInLeft 0.8s ease;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 @keyframes slideInLeft {
@@ -145,7 +156,7 @@
     display: inline-block;
     font-size: 14px;
     letter-spacing: 3px;
-    color: #B71C1C;
+    color: #FFF3E0;
     margin-bottom: 15px;
     position: relative;
     padding: 0 15px;
@@ -158,7 +169,7 @@
     top: 50%;
     width: 30px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #B71C1C, transparent);
+    background: linear-gradient(90deg, transparent, white, transparent);
 }
 
 .about-subtitle-en::before {
@@ -185,13 +196,13 @@
 
 .about-title {
     font-size: 42px;
-    color: #1E1E1E;
+    color: white;
     line-height: 1.2;
     font-weight: 700;
 }
 
 .title-highlight {
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    background: linear-gradient(135deg, #FFFFFF, #FFF3E0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -205,13 +216,13 @@
 .about-quote {
     font-size: 20px;
     font-weight: 500;
-    color: #1E1E1E;
+    color: white;
     line-height: 1.6;
     margin-bottom: 30px;
     padding: 20px;
-    background: linear-gradient(135deg, rgba(183, 28, 28, 0.02), rgba(244, 81, 30, 0.02));
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
-    border-left: 4px solid #B71C1C;
+    border-left: 4px solid white;
     animation: quoteGlow 3s infinite;
 }
 
@@ -219,11 +230,11 @@
 
     0%,
     100% {
-        box-shadow: 0 0 0 rgba(183, 28, 28, 0);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
     }
 
     50% {
-        box-shadow: 0 0 15px rgba(183, 28, 28, 0.1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
 }
 
@@ -232,12 +243,13 @@
     gap: 15px;
     margin-bottom: 25px;
     padding: 15px;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     animation: featureAppear 0.5s ease forwards;
     opacity: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .about-feature:nth-child(2) {
@@ -261,12 +273,13 @@
 
 .about-feature:hover {
     transform: translateX(5px);
-    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.1);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .feature-icon {
     font-size: 32px;
-    color: #B71C1C;
+    color: white;
     flex-shrink: 0;
     animation: iconSpin 10s linear infinite;
 }
@@ -283,7 +296,7 @@
 
 .about-feature p {
     font-size: 17px;
-    color: #5F5F5F;
+    color: #FFF3E0;
     line-height: 1.6;
     margin: 0;
 }
@@ -297,7 +310,7 @@
 
 .highlight-icon {
     font-size: 24px;
-    color: #F4511E;
+    color: white;
     animation: starPulse 1.5s infinite;
 }
 
@@ -334,13 +347,15 @@
 .advantage-item {
     text-align: center;
     padding: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     animation: advantageAppear 0.5s ease forwards;
     opacity: 0;
     transform: translateY(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
 }
 
 .advantage-item:nth-child(1) {
@@ -364,47 +379,50 @@
 
 .advantage-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(183, 28, 28, 0.1);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .advantage-icon-wrapper {
     width: 60px;
     height: 60px;
     margin: 0 auto 15px;
-    background: linear-gradient(135deg, rgba(183, 28, 28, 0.1), rgba(244, 81, 30, 0.1));
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .advantage-item:hover .advantage-icon-wrapper {
     transform: rotateY(180deg);
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    background: white;
+    border-color: white;
 }
 
 .advantage-item:hover .advantage-icon {
-    color: white;
+    color: #FF5722;
     transform: rotateY(180deg);
 }
 
 .advantage-icon {
     font-size: 28px;
-    color: #B71C1C;
+    color: white;
     transition: all 0.3s ease;
 }
 
 .advantage-text h4 {
     font-size: 16px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white;
     margin-bottom: 8px;
 }
 
 .advantage-text p {
     font-size: 13px;
-    color: #5F5F5F;
+    color: #FFF3E0;
     line-height: 1.4;
     margin: 0;
 }
@@ -432,8 +450,9 @@
     border-radius: 20px;
     overflow: hidden;
     margin-bottom: 20px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .gallery-image {
@@ -441,6 +460,7 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.8s ease;
+    filter: brightness(0.95);
 }
 
 .gallery-main:hover .gallery-image {
@@ -483,6 +503,7 @@
     font-size: 14px;
     opacity: 0.9;
     margin-bottom: 5px;
+    color: white;
 }
 
 .caption-text {
@@ -490,6 +511,7 @@
     font-size: 24px;
     font-weight: 600;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
 .gallery-grid {
@@ -505,6 +527,7 @@
     overflow: hidden;
     cursor: pointer;
     position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .gallery-thumb {
@@ -512,6 +535,7 @@
     height: 100%;
     object-fit: cover;
     transition: all 0.3s ease;
+    filter: brightness(0.95);
 }
 
 .gallery-item:hover .gallery-thumb {
@@ -526,7 +550,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(183, 28, 28, 0.3), rgba(244, 81, 30, 0.3));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -539,12 +563,13 @@
 .about-quote-block {
     position: relative;
     padding: 40px 30px;
-    background: linear-gradient(135deg, #fff9f9, #fff);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(183, 28, 28, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     margin-top: 20px;
     overflow: hidden;
+    backdrop-filter: blur(5px);
 }
 
 .about-quote-block::before {
@@ -554,7 +579,7 @@
     right: -30px;
     width: 150px;
     height: 150px;
-    background: linear-gradient(135deg, rgba(183, 28, 28, 0.05), rgba(244, 81, 30, 0.05));
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 50%;
     z-index: 0;
 }
@@ -562,7 +587,7 @@
 .quote-icon {
     font-size: 120px;
     font-family: serif;
-    color: rgba(183, 28, 28, 0.1);
+    color: rgba(255, 255, 255, 0.1);
     position: absolute;
     top: -20px;
     left: 10px;
@@ -573,7 +598,7 @@
 .quote-text {
     font-size: 20px;
     font-style: italic;
-    color: #1E1E1E;
+    color: white;
     line-height: 1.6;
     margin-bottom: 15px;
     position: relative;
@@ -595,7 +620,7 @@
 
 .quote-author {
     font-size: 16px;
-    color: #B71C1C;
+    color: #FFF3E0;
     font-weight: 500;
     text-align: right;
     position: relative;
@@ -606,7 +631,7 @@
 .quote-author::before {
     content: '—';
     margin-right: 10px;
-    color: #F4511E;
+    color: white;
 }
 
 /* Адаптивность */
@@ -625,6 +650,10 @@
 
     .gallery-item {
         height: 80px;
+    }
+    
+    .about-text {
+        padding: 30px;
     }
 }
 
@@ -661,6 +690,28 @@
     .about-advantages {
         grid-template-columns: repeat(3, 1fr);
     }
+    
+    .about-text {
+        padding: 25px;
+    }
+    
+    .container {
+        padding: 0 20px 60px;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-advantages {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .about-quote {
+        font-size: 18px;
+    }
+    
+    .quote-text {
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -675,6 +726,7 @@
 
     .breadcrumbs {
         font-size: 14px;
+        gap: 8px;
     }
 
     .about-title {
@@ -741,15 +793,55 @@
     }
 
     .quote-text {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .quote-author {
         font-size: 14px;
     }
+    
+    .about-text {
+        padding: 20px;
+    }
 }
 
-/* Анимации для фона */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .about-title {
+        font-size: 24px;
+    }
+    
+    .gallery-main {
+        height: 200px;
+    }
+    
+    .gallery-grid {
+        gap: 5px;
+    }
+    
+    .gallery-item {
+        height: 60px;
+    }
+    
+    .about-text {
+        padding: 15px;
+    }
+    
+    .advantage-item {
+        padding: 12px;
+    }
+}
+
+/* Анимации для фона - убрано дублирование */
+/* .about-page {
+    background: #FF5722;
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+} */
+
 @keyframes gradientMove {
     0% {
         background-position: 0% 50%;
@@ -763,10 +855,3 @@
         background-position: 0% 50%;
     }
 }
-
-.about-page {
-    background: linear-gradient(-45deg, #fff, #fcfcfc, #fff9f9, #fcfcfc);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
-}
-

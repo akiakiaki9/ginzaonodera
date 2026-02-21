@@ -1,6 +1,6 @@
 .menu-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #fcfcfc 0%, #ffffff 100%);
+    background-color: #FF5722; /* ЯРКИЙ ОРАНЖЕВЫЙ */
 }
 
 /* Hero секция */
@@ -23,7 +23,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.373));
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.225), rgba(0, 0, 0, 0.5));
     z-index: 1;
 }
 
@@ -51,12 +51,14 @@
     font-weight: 700;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
 .hero-subtitle {
     font-size: 18px;
     opacity: 0.9;
     margin-bottom: 15px;
+    color: white;
 }
 
 .breadcrumbs {
@@ -65,6 +67,7 @@
     justify-content: center;
     gap: 10px;
     font-size: 14px;
+    flex-wrap: wrap;
 }
 
 .breadcrumb-link {
@@ -80,15 +83,18 @@
 .breadcrumb-link:hover {
     opacity: 1;
     transform: translateX(-3px);
+    color: white;
 }
 
 .breadcrumb-separator {
     font-size: 10px;
     opacity: 0.7;
+    color: white;
 }
 
 .breadcrumb-current {
     opacity: 0.9;
+    color: white;
 }
 
 .container {
@@ -105,11 +111,12 @@
     margin-bottom: 30px;
     flex-wrap: wrap;
     gap: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 60px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
-    border: 1px solid #E8E8E8;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .search-wrapper {
@@ -123,7 +130,7 @@
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 16px;
 }
 
@@ -135,13 +142,18 @@
     font-size: 15px;
     outline: none;
     transition: all 0.3s ease;
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .search-input:focus {
-    border-color: #B71C1C;
-    background: white;
-    box-shadow: 0 0 0 4px rgba(183, 28, 28, 0.1);
+    border-color: white;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
 .clear-search {
@@ -151,20 +163,21 @@
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     font-size: 14px;
     transition: all 0.3s ease;
 }
 
 .clear-search:hover {
-    color: #B71C1C;
+    color: white;
 }
 
 .toolbar-actions {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 .filter-toggle {
@@ -172,25 +185,26 @@
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.15);
     border: 2px solid transparent;
     border-radius: 40px;
     font-size: 14px;
     font-weight: 500;
-    color: #1E1E1E;
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .filter-toggle.active {
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white;
+    color: #FF5722;
     border-color: transparent;
 }
 
 .filter-toggle .arrow {
     transition: transform 0.3s ease;
     font-size: 12px;
+    color: inherit;
 }
 
 .filter-toggle .arrow.open {
@@ -200,7 +214,7 @@
 .view-toggle {
     display: flex;
     gap: 5px;
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.15);
     padding: 5px;
     border-radius: 40px;
 }
@@ -215,44 +229,50 @@
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .view-btn.active {
     background: white;
-    color: #B71C1C;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    color: #FF5722;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .sort-select {
     padding: 12px 30px 12px 20px;
-    border: 2px solid #E8E8E8;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 40px;
     font-size: 14px;
-    color: #1E1E1E;
-    background: white;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
     cursor: pointer;
     outline: none;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 15px center;
 }
 
+.sort-select option {
+    background: #FF5722;
+    color: white;
+}
+
 .sort-select:focus {
-    border-color: #B71C1C;
+    border-color: white;
 }
 
 /* Панель фильтров */
 .filters-panel {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     padding: 30px;
     margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    border: 1px solid #E8E8E8;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     animation: slideDown 0.3s ease;
 }
 
@@ -275,9 +295,10 @@
 }
 
 .filter-section {
-    border: 1px solid #E8E8E8;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .filter-header {
@@ -285,25 +306,25 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background: #F9F9F9;
+    background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .filter-header:hover {
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .filter-header h3 {
     font-size: 16px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white;
     margin: 0;
 }
 
 .filter-header .arrow {
     transition: transform 0.3s ease;
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .filter-header .arrow.open {
@@ -324,38 +345,39 @@
     background: transparent;
     border-radius: 8px;
     font-size: 14px;
-    color: #1E1E1E;
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
     margin-bottom: 5px;
 }
 
 .category-filter-btn:hover {
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.15);
     transform: translateX(5px);
 }
 
 .category-filter-btn.active {
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white;
+    color: #FF5722;
 }
 
 .category-filter-btn svg {
     font-size: 18px;
+    color: inherit;
 }
 
 .category-count {
     margin-left: auto;
-    background: #E8E8E8;
+    background: rgba(255, 255, 255, 0.2);
     padding: 2px 8px;
     border-radius: 20px;
     font-size: 12px;
-    color: #5F5F5F;
+    color: white;
 }
 
 .category-filter-btn.active .category-count {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background: rgba(255, 87, 34, 0.2);
+    color: #FF5722;
 }
 
 /* Ценовой диапазон */
@@ -377,22 +399,28 @@
 .price-input label {
     display: block;
     font-size: 12px;
-    color: #5F5F5F;
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 5px;
 }
 
 .price-input input {
     width: 100%;
     padding: 10px;
-    border: 2px solid #E8E8E8;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-size: 14px;
     outline: none;
     transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.price-input input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .price-input input:focus {
-    border-color: #B71C1C;
+    border-color: white;
 }
 
 .price-presets {
@@ -403,48 +431,27 @@
 
 .price-presets button {
     padding: 10px;
-    background: #F5F5F5;
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
     border-radius: 8px;
     font-size: 12px;
-    color: #1E1E1E;
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .price-presets button:hover {
-    background: #B71C1C;
-    color: white;
+    background: white;
+    color: #FF5722;
 }
 
-/* Специальный фильтр */
+/* Специальный фильтр - скрыт */
 .special-filter-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 15px;
-    background: #F5F5F5;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #1E1E1E;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    display: none;
 }
 
-.special-filter-btn:hover {
-    background: #E8E8E8;
-    transform: translateY(-2px);
-}
-
-.special-filter-btn.active {
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
-}
-
-.special-filter-btn svg {
-    font-size: 18px;
+.filter-section:last-child {
+    display: none;
 }
 
 /* Действия с фильтрами */
@@ -453,15 +460,17 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 20px;
-    border-top: 2px solid #E8E8E8;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .clear-filters {
     padding: 12px 24px;
     background: transparent;
-    border: 2px solid #B71C1C;
+    border: 2px solid white;
     border-radius: 40px;
-    color: #B71C1C;
+    color: white;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -469,14 +478,14 @@
 }
 
 .clear-filters:hover {
-    background: #B71C1C;
-    color: white;
+    background: white;
+    color: #FF5722;
     transform: translateY(-2px);
 }
 
 .results-count {
     font-size: 14px;
-    color: #5F5F5F;
+    color: white;
     font-weight: 500;
 }
 
@@ -497,14 +506,15 @@
 
 /* Карточка товара */
 .menu-item-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
-    border: 1px solid #E8E8E8;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
     animation: cardAppear 0.5s ease forwards;
     opacity: 0;
+    backdrop-filter: blur(5px);
 }
 
 .menu-item-card:nth-child(3n+1) { animation-delay: 0.1s; }
@@ -524,8 +534,9 @@
 
 .menu-item-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(183, 28, 28, 0.1);
-    border-color: transparent;
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .menu-item-card.list {
@@ -548,7 +559,7 @@
     width: 100%;
     height: 200px;
     overflow: hidden;
-    background: #F5F5F5;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .item-image {
@@ -556,6 +567,7 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    filter: brightness(0.95);
 }
 
 .menu-item-card:hover .item-image {
@@ -566,14 +578,14 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    background: linear-gradient(135deg, #F4511E, #B71C1C);
-    color: white;
+    background: white;
+    color: #FF5722;
     padding: 5px 12px;
     border-radius: 25px;
     font-size: 12px;
     font-weight: bold;
     z-index: 2;
-    box-shadow: 0 2px 10px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
     animation: badgePulse 2s infinite;
 }
 
@@ -592,23 +604,25 @@
     left: 15px;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.9);
+    background: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #B71C1C;
+    color: #FF5722;
     font-size: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
     z-index: 2;
+    border: 2px solid transparent;
 }
 
 .menu-item-card:hover .item-category-icon {
     transform: rotate(360deg);
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
+    background: transparent;
     color: white;
+    border-color: white;
 }
 
 .item-content {
@@ -626,12 +640,13 @@
 .item-name-link {
     text-decoration: none;
     color: inherit;
+    margin-bottom: 8px;
 }
 
 .item-name {
     font-size: 18px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white;
     margin-bottom: 8px;
     transition: color 0.3s ease;
     line-height: 1.4;
@@ -642,70 +657,83 @@
 }
 
 .item-name-link:hover .item-name {
-    color: #B71C1C;
+    color: #FFF3E0;
 }
 
+/* Скрываем старые детали */
 .item-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+    display: none;
 }
 
 .item-category {
     font-size: 13px;
-    color: #5F5F5F;
-    background: #F5F5F5;
+    color: #FFF3E0;
+    background: rgba(255, 255, 255, 0.1);
     padding: 4px 12px;
     border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.item-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: auto;
 }
 
 .item-price {
     font-size: 20px;
     font-weight: 700;
-    color: #B71C1C;
+    color: white;
 }
 
 .item-cart-btn {
-    width: 100%;
-    padding: 12px;
-    background: #F5F5F5;
-    border: none;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #1E1E1E;
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 18px;
+    flex-shrink: 0;
 }
 
 .item-cart-btn:hover:not(.added) {
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
-    transform: translateY(-2px);
+    background: white;
+    color: #FF5722;
+    transform: scale(1.1);
 }
 
 .item-cart-btn.added {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
+    background: white;
+    color: #4CAF50;
+}
+
+.item-cart-btn svg {
+    width: 60%;
+    height: 60%;
 }
 
 /* Нет результатов */
 .no-results {
     text-align: center;
     padding: 80px 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     grid-column: 1 / -1;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .no-results-icon {
     font-size: 60px;
-    color: #B71C1C;
+    color: white;
     margin-bottom: 20px;
     animation: searchBounce 2s infinite;
 }
@@ -721,21 +749,21 @@
 
 .no-results h3 {
     font-size: 24px;
-    color: #1E1E1E;
+    color: white;
     margin-bottom: 10px;
 }
 
 .no-results p {
     font-size: 16px;
-    color: #5F5F5F;
+    color: #FFF3E0;
     margin-bottom: 30px;
 }
 
 .reset-filters-btn {
     padding: 15px 40px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
-    border: none;
+    background: white;
+    color: #FF5722;
+    border: 2px solid white;
     border-radius: 50px;
     font-size: 16px;
     font-weight: 500;
@@ -745,10 +773,128 @@
 
 .reset-filters-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: white;
 }
 
-/* Адаптивность */
+/* Компактные категории */
+.filter-section.compact {
+    border: none;
+    background: transparent;
+}
+
+.filter-header.compact {
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.filter-header.compact h3 {
+    font-size: 15px;
+    color: white;
+}
+
+.filter-content.compact {
+    padding: 10px 5px;
+}
+
+.categories-compact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.categories-compact-grid::-webkit-scrollbar {
+    width: 4px;
+}
+
+.categories-compact-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.categories-compact-grid::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 4px;
+}
+
+.category-compact-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 5px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.category-compact-btn:hover {
+    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.category-compact-btn.active {
+    background: white;
+    border-color: transparent;
+    color: #FF5722;
+}
+
+.category-compact-icon {
+    font-size: 20px;
+    color: inherit;
+}
+
+.category-compact-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    color: inherit;
+}
+
+.category-compact-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: white;
+    color: #FF5722;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 20px;
+    min-width: 18px;
+    text-align: center;
+}
+
+.category-compact-btn.active .category-compact-count {
+    background: #FF5722;
+    color: white;
+}
+
+/* Компактные карточки товаров */
+.menu-item-card-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
+
 @media (max-width: 1024px) {
     .menu-items.grid {
         grid-template-columns: repeat(2, 1fr);
@@ -765,33 +911,85 @@
     }
     
     .hero-title {
-        font-size: 42px;
+        font-size: 36px;
+    }
+    
+    .hero-subtitle {
+        font-size: 16px;
     }
     
     .menu-toolbar {
         flex-direction: column;
-        padding: 20px;
+        padding: 15px;
+        border-radius: 30px;
     }
     
     .search-wrapper {
         width: 100%;
+        min-width: auto;
+    }
+    
+    .search-input {
+        padding: 14px 14px 14px 45px;
+        font-size: 14px;
     }
     
     .toolbar-actions {
         width: 100%;
-        flex-wrap: wrap;
         justify-content: center;
+    }
+    
+    .filter-toggle span {
+        display: none;
+    }
+    
+    .filter-toggle {
+        padding: 10px 18px;
+    }
+    
+    .view-toggle {
+        order: -1;
+    }
+    
+    .view-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .sort-select {
+        padding: 10px 25px 10px 15px;
+        font-size: 13px;
     }
     
     .filters-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
     }
     
+    .filters-panel {
+        padding: 20px;
+    }
+    
+    .filters-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .clear-filters {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .results-count {
+        text-align: center;
+    }
+    
+    /* Сетка товаров для планшетов */
     .menu-items.grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: 0 auto;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+        max-width: none;
     }
     
     .menu-item-card.list {
@@ -804,14 +1002,41 @@
         height: 200px;
     }
     
+    .item-image-wrapper {
+        height: 160px;
+    }
+    
+    .item-content {
+        padding: 15px;
+    }
+    
+    .item-name {
+        font-size: 15px;
+        min-height: 42px;
+    }
+    
+    .item-price {
+        font-size: 16px;
+    }
+    
+    .item-cart-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
     .price-inputs {
         flex-direction: column;
+    }
+    
+    .categories-compact-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 32px;
+        font-size: 28px;
     }
     
     .hero-subtitle {
@@ -823,43 +1048,193 @@
     }
     
     .menu-toolbar {
-        padding: 15px;
+        padding: 12px;
     }
     
-    .filter-toggle span {
-        display: none;
+    .filter-toggle {
+        padding: 8px 15px;
+        font-size: 13px;
     }
     
-    .view-toggle {
-        order: -1;
+    .view-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
     }
     
     .sort-select {
-        width: 100%;
+        font-size: 12px;
+        padding: 8px 22px 8px 12px;
     }
     
-    .filters-panel {
-        padding: 20px;
+    /* Супер-компактные карточки для мобилок */
+    .menu-items.grid {
+        gap: 10px !important;
     }
     
-    .price-presets {
-        grid-template-columns: 1fr;
+    .menu-item-card {
+        border-radius: 16px !important;
     }
     
-    .filters-actions {
-        flex-direction: column;
-        gap: 15px;
+    .item-image-wrapper {
+        height: 140px;
+        max-height: 140px;
     }
     
-    .clear-filters {
-        width: 100%;
+    .item-content {
+        padding: 12px !important;
     }
     
     .item-name {
-        font-size: 16px;
+        font-size: 14px !important;
+        min-height: 38px !important;
+        margin-bottom: 6px !important;
     }
     
     .item-price {
+        font-size: 15px !important;
+    }
+    
+    .item-cart-btn {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 14px !important;
+    }
+    
+    .item-badge {
+        top: 8px !important;
+        right: 8px !important;
+        padding: 3px 8px !important;
+        font-size: 9px !important;
+    }
+    
+    .item-category-icon {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 14px !important;
+        bottom: 8px !important;
+        left: 8px !important;
+    }
+    
+    .categories-compact-grid {
+        gap: 6px;
+    }
+    
+    .category-compact-btn {
+        padding: 8px 3px;
+    }
+    
+    .category-compact-icon {
         font-size: 18px;
+    }
+    
+    .category-compact-name {
+        font-size: 11px;
+    }
+    
+    .no-results {
+        padding: 60px 20px;
+    }
+    
+    .no-results h3 {
+        font-size: 20px;
+    }
+    
+    .no-results p {
+        font-size: 14px;
+    }
+    
+    .reset-filters-btn {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 24px;
+    }
+    
+    .menu-items.grid {
+        gap: 8px !important;
+    }
+    
+    .item-image-wrapper {
+        height: 120px;
+        max-height: 120px;
+    }
+    
+    .item-content {
+        padding: 10px !important;
+    }
+    
+    .item-name {
+        font-size: 12px !important;
+        min-height: 32px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    .item-price {
+        font-size: 13px !important;
+    }
+    
+    .item-cart-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 12px !important;
+    }
+    
+    .item-badge {
+        padding: 2px 6px !important;
+        font-size: 8px !important;
+    }
+    
+    .item-category-icon {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 12px !important;
+    }
+    
+    .categories-compact-grid {
+        gap: 4px;
+    }
+    
+    .category-compact-btn {
+        padding: 6px 2px;
+    }
+    
+    .category-compact-icon {
+        font-size: 16px;
+    }
+    
+    .category-compact-name {
+        font-size: 10px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 320px) {
+    .menu-items.grid {
+        gap: 5px !important;
+    }
+    
+    .item-image-wrapper {
+        height: 100px;
+        max-height: 100px;
+    }
+    
+    .item-name {
+        font-size: 11px !important;
+        min-height: 28px !important;
+    }
+    
+    .item-price {
+        font-size: 12px !important;
+    }
+    
+    .item-cart-btn {
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 11px !important;
     }
 }

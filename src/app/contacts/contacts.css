@@ -2,7 +2,7 @@
 
 .contact-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #fcfcfc 0%, #ffffff 100%);
+    background-color: #F4511E; /* Оранжевый фон */
 }
 
 /* Hero секция */
@@ -24,7 +24,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.373));
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.225), rgba(0, 0, 0, 0.5)); /* Оранжевый градиент */
     z-index: 1;
 }
 
@@ -53,6 +53,7 @@
     font-weight: 700;
     margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
 .breadcrumbs {
@@ -76,20 +77,24 @@
 .breadcrumb-link:hover {
     opacity: 1;
     transform: translateX(-3px);
+    color: white;
 }
 
 .breadcrumb-icon {
     font-size: 14px;
+    color: white;
 }
 
 .breadcrumb-separator {
     font-size: 12px;
     opacity: 0.7;
+    color: white;
 }
 
 .breadcrumb-current {
     opacity: 0.9;
     font-weight: 500;
+    color: white;
 }
 
 .container {
@@ -108,7 +113,7 @@
 /* Общие стили для блоков */
 .block-title {
     font-size: 32px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     margin-bottom: 10px;
     position: relative;
     padding-bottom: 15px;
@@ -121,23 +126,24 @@
     left: 0;
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, #B71C1C, #F4511E);
+    background: linear-gradient(90deg, #FFFFFF, #FFE0B2); /* Белый градиент */
     border-radius: 2px;
 }
 
 .block-subtitle {
     font-size: 16px;
-    color: #5F5F5F;
+    color: #FFE0B2; /* Светло-оранжевый */
     margin-bottom: 30px;
 }
 
 /* Левый блок - информация */
 .contact-info-block {
-    background: white;
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый фон */
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     animation: slideInLeft 0.8s ease;
 }
 
@@ -196,7 +202,7 @@
 
 .section-icon {
     font-size: 24px;
-    color: #B71C1C;
+    color: white; /* Белая иконка */
     animation: iconPulse 2s infinite;
 }
 
@@ -215,7 +221,7 @@
 .section-title {
     font-size: 18px;
     font-weight: 600;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
 }
 
 .section-content {
@@ -227,7 +233,7 @@
 .info-item,
 .info-item-link {
     font-size: 15px;
-    color: #5F5F5F;
+    color: #FFE0B2; /* Светло-оранжевый */
     line-height: 1.5;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -235,20 +241,22 @@
 }
 
 .info-item-link {
-    color: #B71C1C;
+    color: white; /* Белый текст */
     font-weight: 500;
+    border-bottom: 2px solid transparent;
 }
 
 .info-item-link:hover {
-    color: #F4511E;
+    color: white; /* Белый текст */
     transform: translateX(5px);
+    border-bottom-color: white;
 }
 
 .info-note {
     padding: 20px;
-    background: linear-gradient(135deg, rgba(183, 28, 28, 0.03), rgba(244, 81, 30, 0.03));
+    background: rgba(255, 255, 255, 0.05); /* Полупрозрачный белый */
     border-radius: 12px;
-    border-left: 4px solid #B71C1C;
+    border-left: 4px solid white; /* Белая граница */
     animation: glowNote 2s infinite;
 }
 
@@ -256,28 +264,29 @@
 
     0%,
     100% {
-        box-shadow: 0 0 0 rgba(183, 28, 28, 0);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
     }
 
     50% {
-        box-shadow: 0 0 10px rgba(183, 28, 28, 0.1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 }
 
 .info-note p {
     font-size: 14px;
-    color: #1E1E1E;
+    color: white; /* Белый текст */
     line-height: 1.6;
     margin: 0;
 }
 
 /* Правый блок - карта */
 .contact-map-block {
-    background: white;
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый фон */
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     animation: slideInRight 0.8s ease;
     display: flex;
     flex-direction: column;
@@ -301,14 +310,16 @@
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .map-container:hover {
-    box-shadow: 0 10px 25px rgba(183, 28, 28, 0.1);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .map-iframe {
@@ -316,6 +327,7 @@
     height: 100%;
     min-height: 350px;
     transition: all 0.3s ease;
+    filter: brightness(0.95);
 }
 
 .map-button {
@@ -324,14 +336,14 @@
     justify-content: center;
     gap: 10px;
     padding: 15px 30px;
-    background: linear-gradient(135deg, #B71C1C, #F4511E);
-    color: white;
+    background: white; /* Белый фон */
+    color: #F4511E; /* Оранжевый текст */
     text-decoration: none;
     border-radius: 50px;
     font-size: 16px;
     font-weight: 500;
     transition: all 0.3s ease;
-    border: none;
+    border: 2px solid white;
     cursor: pointer;
     margin-top: auto;
     align-self: flex-start;
@@ -339,8 +351,10 @@
 
 .map-button:hover {
     transform: translateY(-3px) translateX(5px);
-    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
     gap: 15px;
+    background: transparent;
+    color: white;
 }
 
 .button-icon {
@@ -471,15 +485,15 @@
 /* Анимация для карты */
 @keyframes mapPulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(183, 28, 28, 0.2);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
     }
 
     70% {
-        box-shadow: 0 0 0 10px rgba(183, 28, 28, 0);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(183, 28, 28, 0);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
 }
 

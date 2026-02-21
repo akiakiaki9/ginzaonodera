@@ -19,7 +19,6 @@ import {
 import {
     FiGrid,
     FiList,
-    FiStar,
     FiCoffee,
     FiDroplet
 } from 'react-icons/fi';
@@ -39,11 +38,11 @@ const MenuPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortBy, setSortBy] = useState('default');
     const [priceRange, setPriceRange] = useState({ min: 0, max: 200000 });
-    const [showFilters, setShowFilters] = useState(true); // true по умолчанию
+    const [showFilters, setShowFilters] = useState(true);
     const [viewMode, setViewMode] = useState('grid');
     const [addedItems, setAddedItems] = useState({});
-    const [showPriceFilter, setShowPriceFilter] = useState(true); // открыт по умолчанию
-    const [showCategoryFilter, setShowCategoryFilter] = useState(true); // открыт по умолчанию
+    const [showPriceFilter, setShowPriceFilter] = useState(true);
+    const [showCategoryFilter, setShowCategoryFilter] = useState(true);
 
     const { addToCart } = useCart();
     const filterRef = useRef(null);
@@ -112,7 +111,10 @@ const MenuPage = () => {
         setFilteredItems(result);
     }, [selectedCategory, searchQuery, sortBy, priceRange, items]);
 
-    const handleAddToCart = (item) => {
+    const handleAddToCart = (item, e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
         addToCart(item, 1);
 
         setAddedItems(prev => ({ ...prev, [item.id]: true }));
@@ -219,31 +221,35 @@ const MenuPage = () => {
                 {showFilters && (
                     <div className="filters-panel" ref={filterRef}>
                         <div className="filters-grid">
-                            {/* Категории */}
-                            <div className="filter-section">
+                            {/* Категории - компактные */}
+                            <div className="filter-section compact">
                                 <div
-                                    className="filter-header"
+                                    className="filter-header compact"
                                     onClick={() => setShowCategoryFilter(!showCategoryFilter)}
                                 >
                                     <h3>Категории</h3>
                                     <FaChevronDown className={`arrow ${showCategoryFilter ? 'open' : ''}`} />
                                 </div>
                                 {showCategoryFilter && (
-                                    <div className="filter-content">
-                                        {categories.map(cat => {
-                                            const Icon = cat.icon;
-                                            return (
-                                                <button
-                                                    key={cat.id}
-                                                    className={`category-filter-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-                                                    onClick={() => setSelectedCategory(cat.id)}
-                                                >
-                                                    <Icon />
-                                                    <span>{cat.name}</span>
-                                                    <span className="category-count">{cat.count}</span>
-                                                </button>
-                                            );
-                                        })}
+                                    <div className="filter-content compact">
+                                        <div className="categories-compact-grid">
+                                            {categories.map(cat => {
+                                                const Icon = cat.icon;
+                                                const isActive = selectedCategory === cat.id;
+                                                return (
+                                                    <button
+                                                        key={cat.id}
+                                                        className={`category-compact-btn ${isActive ? 'active' : ''}`}
+                                                        onClick={() => setSelectedCategory(cat.id)}
+                                                        title={cat.name}
+                                                    >
+                                                        <Icon className="category-compact-icon" />
+                                                        <span className="category-compact-name">{cat.name}</span>
+                                                        <span className="category-compact-count">{cat.count}</span>
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -298,22 +304,6 @@ const MenuPage = () => {
                                     </div>
                                 )}
                             </div>
-
-                            {/* Только топ */}
-                            <div className="filter-section">
-                                <div className="filter-header">
-                                    <h3>Особые предложения</h3>
-                                </div>
-                                <div className="filter-content">
-                                    <button
-                                        className={`special-filter-btn ${selectedCategory === 'top' ? 'active' : ''}`}
-                                        onClick={() => setSelectedCategory(selectedCategory === 'top' ? 'all' : 'top')}
-                                    >
-                                        <FiStar />
-                                        <span>Только хиты</span>
-                                    </button>
-                                </div>
-                            </div>
                         </div>
 
                         <div className="filters-actions">
@@ -334,53 +324,42 @@ const MenuPage = () => {
                         filteredItems.map((item) => {
                             const CategoryIcon = getCategoryIcon(item.category);
                             return (
-                                <div key={item.id} className={`menu-item-card ${viewMode}`}>
-                                    <Link href={`/product/${item.id}`} className="item-link">
-                                        <div className="item-image-wrapper">
-                                            <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="item-image"
-                                            />
-                                            {item.isTop && (
-                                                <span className="item-badge">Хит</span>
-                                            )}
-                                            <div className="item-category-icon">
-                                                <CategoryIcon />
+                                <div key={item.id} className="menu-item-card-wrapper">
+                                    <div className={`menu-item-card ${viewMode}`}>
+                                        <Link href={`/product/${item.id}`} className="item-link">
+                                            <div className="item-image-wrapper">
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    className="item-image"
+                                                />
+                                                {item.isTop && (
+                                                    <span className="item-badge">Хит</span>
+                                                )}
+                                                <div className="item-category-icon">
+                                                    <CategoryIcon />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
-
-                                    <div className="item-content">
-                                        <Link href={`/product/${item.id}`} className="item-name-link">
-                                            <h3 className="item-name">{item.name}</h3>
                                         </Link>
 
-                                        <div className="item-details">
-                                            <span className="item-category">
-                                                {categories.find(c => c.id === item.category)?.name}
-                                            </span>
-                                            <span className="item-price">
-                                                {item.price.toLocaleString()} сум
-                                            </span>
-                                        </div>
+                                        <div className="item-content">
+                                            <Link href={`/product/${item.id}`} className="item-name-link">
+                                                <h3 className="item-name">{item.name}</h3>
+                                            </Link>
 
-                                        <button
-                                            className={`item-cart-btn ${addedItems[item.id] ? 'added' : ''}`}
-                                            onClick={() => handleAddToCart(item)}
-                                        >
-                                            {addedItems[item.id] ? (
-                                                <>
-                                                    <FaCheck />
-                                                    <span>Добавлено</span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <FaShoppingCart />
-                                                    <span>В корзину</span>
-                                                </>
-                                            )}
-                                        </button>
+                                            <div className="item-price-row">
+                                                <span className="item-price">
+                                                    {item.price.toLocaleString()} сум
+                                                </span>
+                                                <button
+                                                    className={`item-cart-btn ${addedItems[item.id] ? 'added' : ''}`}
+                                                    onClick={(e) => handleAddToCart(item, e)}
+                                                    aria-label="Добавить в корзину"
+                                                >
+                                                    {addedItems[item.id] ? <FaCheck className='item-cart-icon' /> : <FaShoppingCart className='item-cart-icon' />}
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             );

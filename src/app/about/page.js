@@ -128,28 +128,28 @@ const AboutPage = () => {
                         <div className="gallery-grid">
                             <div className="gallery-item">
                                 <img
-                                    src="/images/about-1.jpg"
+                                    src="/images/about/1.jpg"
                                     alt="Суши от шефа"
                                     className="gallery-thumb"
                                 />
                             </div>
                             <div className="gallery-item">
                                 <img
-                                    src="/images/about-2.jpg"
+                                    src="/images/about/2.jpg"
                                     alt="Атмосфера ресторана"
                                     className="gallery-thumb"
                                 />
                             </div>
                             <div className="gallery-item">
                                 <img
-                                    src="/images/about-3.jpg"
+                                    src="/images/about/3.jpg"
                                     alt="Японский интерьер"
                                     className="gallery-thumb"
                                 />
                             </div>
                             <div className="gallery-item">
                                 <img
-                                    src="/images/about-4.jpg"
+                                    src="/images/about/4.jpg"
                                     alt="Блюдо от шефа"
                                     className="gallery-thumb"
                                 />
