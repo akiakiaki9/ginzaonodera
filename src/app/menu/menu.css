@@ -1428,3 +1428,81 @@
         font-size: 9px;
     }
 }
+
+/* Стили для сетов */
+.sets-item {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #4CAF50, #2196F3) border-box;
+    animation: setsItemGlow 3s infinite;
+}
+
+.sets-item-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.sets-item-icon {
+    font-size: 14px;
+}
+
+.sets-item-text {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@keyframes setsItemGlow {
+    0%, 100% {
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+    }
+    50% {
+        box-shadow: 0 5px 25px rgba(33, 150, 243, 0.3);
+    }
+}
+
+/* Обновленные стили для промо */
+.promo-item {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #FFD700, #FFA500) border-box;
+}
+
+.promo-item-badge {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1E1E1E;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .sets-item-badge {
+        padding: 3px 8px;
+        font-size: 10px;
+        top: 5px;
+        left: 5px;
+    }
+    
+    .sets-item-icon {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sets-item-badge {
+        padding: 2px 6px;
+        font-size: 9px;
+    }
+}

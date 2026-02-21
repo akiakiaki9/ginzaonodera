@@ -69,6 +69,11 @@ const MenuPage = () => {
     useEffect(() => {
         setItems(DATA);
         setFilteredItems(DATA);
+        
+        // Отладка: проверим сколько товаров в каждой категории
+        console.log('=== ПРОВЕРКА КАТЕГОРИЙ ===');
+        console.log('Промо товары:', DATA.filter(item => item.category === 'promo').length);
+        console.log('Сеты:', DATA.filter(item => item.category === 'sets').length);
     }, []);
 
     // Фильтрация и сортировка
@@ -78,6 +83,7 @@ const MenuPage = () => {
         // Фильтр по категории
         if (selectedCategory !== 'all') {
             result = result.filter(item => item.category === selectedCategory);
+            console.log(`Выбрана категория: ${selectedCategory}, найдено: ${result.length} товаров`);
         }
 
         // Поиск
@@ -330,7 +336,10 @@ const MenuPage = () => {
                             const CategoryIcon = getCategoryIcon(item.category);
                             return (
                                 <div key={item.id} className="menu-item-card-wrapper">
-                                    <div className={`menu-item-card ${viewMode} ${item.category === 'promo' ? 'promo-item' : ''}`}>
+                                    <div className={`menu-item-card ${viewMode} 
+                                        ${item.category === 'promo' ? 'promo-item' : ''} 
+                                        ${item.category === 'sets' ? 'sets-item' : ''}`}
+                                    >
                                         <Link href={`/product/${item.id}`} className="item-link">
                                             <div className="item-image-wrapper">
                                                 <img
@@ -344,7 +353,13 @@ const MenuPage = () => {
                                                         <span className="promo-item-text">Акция</span>
                                                     </div>
                                                 )}
-                                                {item.isTop && item.category !== 'promo' && (
+                                                {item.category === 'sets' && (
+                                                    <div className="sets-item-badge">
+                                                        <span className="sets-item-icon">🍱</span>
+                                                        <span className="sets-item-text">Сет</span>
+                                                    </div>
+                                                )}
+                                                {item.isTop && item.category !== 'promo' && item.category !== 'sets' && (
                                                     <span className="item-badge">Хит</span>
                                                 )}
                                                 <div className="item-category-icon">
@@ -370,7 +385,6 @@ const MenuPage = () => {
                                                     {addedItems[item.id] ? <FaCheck className='item-cart-icon' /> : <FaShoppingCart className='item-cart-icon' />}
                                                 </button>
                                             </div>
-                        <span className="item-category-badge">{item.category === 'sets' ? 'Сет' : ''}</span>
                                         </div>
                                     </div>
                                 </div>

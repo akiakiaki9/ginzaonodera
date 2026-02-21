@@ -66,19 +66,11 @@ const Menu = () => {
             let filtered = [];
             
             if (selectedCategory === 'all') {
-                // Для "Все меню" показываем случайные 6 товаров
-                filtered = [...DATA].sort(() => 0.5 - Math.random()).slice(0, 6);
+                // Для "Все меню" показываем ВСЕ товары (но можно и случайные)
+                filtered = [...DATA]; // Убрал slice(0,6) чтобы показывать все
             } else {
                 // Фильтруем по категории из данных
                 filtered = DATA.filter(item => item.category === selectedCategory);
-                
-                // Если это промо-категория, показываем все промо-товары (не больше 6)
-                if (selectedCategory === 'promo') {
-                    filtered = DATA.filter(item => item.category === 'promo');
-                }
-                
-                // Берем первые 6 товаров
-                filtered = filtered.slice(0, 6);
             }
             
             setCategoryItems(filtered);
@@ -283,7 +275,7 @@ const Menu = () => {
                     ))}
                 </div>
 
-                {/* Превью товаров категории */}
+                {/* Превью товаров категории - ТЕПЕРЬ ПОКАЗЫВАЕТ ВСЕ ТОВАРЫ */}
                 <div className={`category-items ${isAnimating ? 'fade-out' : 'fade-in'}`}>
                     {categoryItems.length > 0 ? (
                         <div className="items-grid">
@@ -304,7 +296,12 @@ const Menu = () => {
                                                     🔥 Акция
                                                 </div>
                                             )}
-                                            {item.isTop && item.category !== 'promo' && (
+                                            {item.category === 'sets' && (
+                                                <div className="sets-item-badge">
+                                                    🍱 Сет
+                                                </div>
+                                            )}
+                                            {item.isTop && item.category !== 'promo' && item.category !== 'sets' && (
                                                 <span className="item-badge">Хит</span>
                                             )}
                                         </div>

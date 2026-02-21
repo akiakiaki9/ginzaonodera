@@ -741,7 +741,7 @@ const DATA = [
         id: 106,
         name: 'Сет запечённый',
         price: 150000,
-        image: '/images/menu/107.png',
+        image: '/images/menu/135.jpg',
         category: 'promo',
     },
     {
