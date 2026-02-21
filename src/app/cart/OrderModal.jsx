@@ -16,7 +16,7 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
 
     const phoneNumber = '+998 (94) 778-08-80';
 
-    // Реквизиты для Click (пример)
+    // Реквизиты для Click
     const clickDetails = {
         cardNumber: '6262 5700 0040 8270',
         holderName: 'Халимов Ф М',
@@ -26,35 +26,47 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Формируем текст заказа
-        const orderItems = cartItems.map(item =>
+        // Формируем текст заказа для отправки
+        const orderItemsList = cartItems.map(item =>
             `${item.name} x${item.quantity} - ${(item.price * item.quantity).toLocaleString()} сум`
         ).join('\n');
 
+        // Формируем данные для отправки
         const formData = new FormData();
+        formData.append('access_key', '22c186b3-8dd8-4f97-97b7-e7dc76a524ab');
+        
+        // Основная информация
         formData.append('name', name);
         formData.append('phone', phone);
-        formData.append('paymentMethod', paymentMethod === 'cash' ? 'Наличные' : 'Click');
-        formData.append('order', orderItems);
-        formData.append('total', total);
-        formData.append('_subject', `Новый заказ от ${name} (${paymentMethod === 'cash' ? 'Наличные' : 'Click'})`);
-
-        // Добавляем информацию о том, что оплата будет произведена через Click
+        formData.append('payment_method', paymentMethod === 'cash' ? 'Наличные' : 'Click');
+        formData.append('total_amount', `${total.toLocaleString()} сум`);
+        
+        // Детали заказа
+        formData.append('order_details', orderItemsList);
+        formData.append('items_count', cartItems.length.toString());
+        
+        // Тема письма
+        formData.append('subject', `Новый заказ от ${name} - ${paymentMethod === 'cash' ? 'Наличные' : 'Click'}`);
+        
+        // От кого
+        formData.append('from_name', 'Сайт Суши-магазин');
+        
+        // Дополнительная информация
         if (paymentMethod === 'click') {
-            formData.append('clickPayment', 'Оплата будет произведена через Click');
-            formData.append('clickCard', clickDetails.cardNumber);
+            formData.append('click_card', clickDetails.cardNumber);
+            formData.append('click_holder', clickDetails.holderName);
+            formData.append('payment_note', 'Клиент оплатит через Click');
         }
 
         try {
-            const response = await fetch('https://formspree.io/f/xzdajzzy', {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                body: formData
             });
 
-            if (response.ok) {
+            const data = await response.json();
+
+            if (data.success) {
                 setSubmitStatus('success');
                 clearCart();
                 setTimeout(() => {
@@ -66,8 +78,10 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                 }, 3000);
             } else {
                 setSubmitStatus('error');
+                console.error('Ошибка отправки:', data);
             }
         } catch (error) {
+            console.error('Ошибка:', error);
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);

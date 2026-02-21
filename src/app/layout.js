@@ -17,6 +17,23 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "GINZA ONODERA",
   description: "Ресторан японской кухни Ginza Onodera в Бухаре",
+  icons: {
+    icon: [
+      { url: '/images/logo.png' },
+      { url: '/images/logo.png', sizes: '16x16', type: 'image/png' },
+      { url: '/images/logo.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/images/logo.png' },
+    ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/images/logo.png',
+      },
+    ],
+  },
+  manifest: '/images/logo.png',
 };
 
 export default function RootLayout({ children }) {
@@ -31,4 +48,4 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
-};
+}

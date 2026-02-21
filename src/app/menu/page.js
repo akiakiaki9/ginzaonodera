@@ -19,8 +19,7 @@ import {
 import {
     FiGrid,
     FiList,
-    FiCoffee,
-    FiDroplet
+    FiCoffee
 } from 'react-icons/fi';
 import { MdOutlineSoupKitchen } from 'react-icons/md';
 import { useCart } from '../context/CartContext';
@@ -30,7 +29,7 @@ import { GiNoodles } from "react-icons/gi";
 import { GiSushis } from "react-icons/gi";
 import { GiFishCooked } from "react-icons/gi";
 import { LuSalad } from "react-icons/lu";
-import { FaUtensils } from "react-icons/fa";
+import { FaUtensils, FaFire } from "react-icons/fa";
 
 const MenuPage = () => {
     const [items, setItems] = useState([]);
@@ -51,11 +50,10 @@ const MenuPage = () => {
     // Категории с иконками
     const categories = [
         { id: 'all', name: 'Все блюда', icon: FiGrid, count: DATA.length },
-        { id: 'promo', name: 'Акционные блюда', icon: FaCheck, count: DATA.filter(item => item.category === 'promo').length },
+        { id: 'promo', name: 'Акционные блюда', icon: FaFire, count: DATA.filter(item => item.category === 'promo').length, isPromo: true },
         { id: 'sets', name: 'Сеты', icon: FaUtensils, count: DATA.filter(item => item.category === 'sets').length },
         { id: 'noodles', name: 'Лапша', icon: GiNoodles, count: DATA.filter(item => item.category === 'noodles').length },
-        { id: 'noodles', name: 'Лапша', icon: GiNoodles, count: DATA.filter(item => item.category === 'noodles').length },
-        { id: 'rolls', name: 'Роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'rolls').length },
+        { id: 'rolls', name: 'Горячие роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'rolls').length },
         { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'cold_rolls').length },
         { id: 'soups', name: 'Супы', icon: MdOutlineSoupKitchen, count: DATA.filter(item => item.category === 'soups').length },
         { id: 'hot_dishes', name: 'Горячие блюда', icon: GiFishCooked, count: DATA.filter(item => item.category === 'hot_dishes').length },
@@ -221,11 +219,11 @@ const MenuPage = () => {
                     </div>
                 </div>
 
-                {/* Расширенные фильтры - всегда открыты */}
+                {/* Расширенные фильтры */}
                 {showFilters && (
                     <div className="filters-panel" ref={filterRef}>
                         <div className="filters-grid">
-                            {/* Категории - компактные */}
+                            {/* Категории */}
                             <div className="filter-section compact">
                                 <div
                                     className="filter-header compact"
@@ -240,16 +238,19 @@ const MenuPage = () => {
                                             {categories.map(cat => {
                                                 const Icon = cat.icon;
                                                 const isActive = selectedCategory === cat.id;
+                                                const isPromo = cat.isPromo;
+                                                
                                                 return (
                                                     <button
                                                         key={cat.id}
-                                                        className={`category-compact-btn ${isActive ? 'active' : ''}`}
+                                                        className={`category-compact-btn ${isActive ? 'active' : ''} ${isPromo ? 'promo-category' : ''}`}
                                                         onClick={() => setSelectedCategory(cat.id)}
-                                                        title={cat.name}
                                                     >
+                                                        {isPromo && <span className="promo-category-icon">🔥</span>}
                                                         <Icon className="category-compact-icon" />
                                                         <span className="category-compact-name">{cat.name}</span>
                                                         <span className="category-compact-count">{cat.count}</span>
+                                                        {isPromo && <span className="promo-badge-mini">Акция</span>}
                                                     </button>
                                                 );
                                             })}
@@ -329,7 +330,7 @@ const MenuPage = () => {
                             const CategoryIcon = getCategoryIcon(item.category);
                             return (
                                 <div key={item.id} className="menu-item-card-wrapper">
-                                    <div className={`menu-item-card ${viewMode}`}>
+                                    <div className={`menu-item-card ${viewMode} ${item.category === 'promo' ? 'promo-item' : ''}`}>
                                         <Link href={`/product/${item.id}`} className="item-link">
                                             <div className="item-image-wrapper">
                                                 <img
@@ -337,7 +338,13 @@ const MenuPage = () => {
                                                     alt={item.name}
                                                     className="item-image"
                                                 />
-                                                {item.isTop && (
+                                                {item.category === 'promo' && (
+                                                    <div className="promo-item-badge">
+                                                        <span className="promo-item-icon">🔥</span>
+                                                        <span className="promo-item-text">Акция</span>
+                                                    </div>
+                                                )}
+                                                {item.isTop && item.category !== 'promo' && (
                                                     <span className="item-badge">Хит</span>
                                                 )}
                                                 <div className="item-category-icon">
@@ -363,6 +370,7 @@ const MenuPage = () => {
                                                     {addedItems[item.id] ? <FaCheck className='item-cart-icon' /> : <FaShoppingCart className='item-cart-icon' />}
                                                 </button>
                                             </div>
+                        <span className="item-category-badge">{item.category === 'sets' ? 'Сет' : ''}</span>
                                         </div>
                                     </div>
                                 </div>

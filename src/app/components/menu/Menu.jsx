@@ -1,12 +1,9 @@
-// src/app/menu/page.js
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import {
     FaCheck,
-    FaStar,
-    FaGift,
     FaFire
 } from 'react-icons/fa6';
 import { GiSushis } from 'react-icons/gi';
@@ -37,12 +34,6 @@ const Menu = () => {
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
 
-    // Функция для проверки, является ли товар акционным
-    const isPromoItem = (item) => {
-        // Проверяем по цене или по специальному флагу
-        return item.price >= 299000 || item.isPromo === true;
-    };
-
     // Категории
     const categories = [
         { id: 'all', name: 'Всё меню', icon: FaUtensils },
@@ -62,27 +53,41 @@ const Menu = () => {
         { id: 'tea', name: 'Чай', icon: FaCoffee },
     ];
 
+    // Подсчет количества товаров в каждой категории
+    const getCategoryCount = (categoryId) => {
+        if (categoryId === 'all') return DATA.length;
+        return DATA.filter(item => item.category === categoryId).length;
+    };
+
     useEffect(() => {
         setIsAnimating(true);
 
         setTimeout(() => {
+            let filtered = [];
+            
             if (selectedCategory === 'all') {
-                const shuffled = [...DATA].sort(() => 0.5 - Math.random());
-                setCategoryItems(shuffled.slice(0, 6));
-            } else if (selectedCategory === 'promo') {
-                // Фильтруем только акционные товары
-                const promoItems = DATA.filter(item => isPromoItem(item));
-                setCategoryItems(promoItems.slice(0, 6));
+                // Для "Все меню" показываем случайные 6 товаров
+                filtered = [...DATA].sort(() => 0.5 - Math.random()).slice(0, 6);
             } else {
-                const filtered = DATA.filter(item => item.category === selectedCategory);
-                setCategoryItems(filtered.slice(0, 6));
+                // Фильтруем по категории из данных
+                filtered = DATA.filter(item => item.category === selectedCategory);
+                
+                // Если это промо-категория, показываем все промо-товары (не больше 6)
+                if (selectedCategory === 'promo') {
+                    filtered = DATA.filter(item => item.category === 'promo');
+                }
+                
+                // Берем первые 6 товаров
+                filtered = filtered.slice(0, 6);
             }
+            
+            setCategoryItems(filtered);
             setIsAnimating(false);
         }, 300);
     }, [selectedCategory]);
 
     const handleAddToCart = (item, e) => {
-        e.preventDefault(); // Предотвращаем переход по ссылке
+        e.preventDefault();
         e.stopPropagation();
         
         addToCart(item, 1);
@@ -226,6 +231,7 @@ const Menu = () => {
                         {categories.map((category) => {
                             const Icon = category.icon;
                             const isSelected = selectedCategory === category.id;
+                            const itemCount = getCategoryCount(category.id);
 
                             return (
                                 <button
@@ -233,9 +239,15 @@ const Menu = () => {
                                     className={`category-btn ${isSelected ? 'active' : ''} ${category.isPromo ? 'promo-category' : ''}`}
                                     onClick={() => selectCategory(category.id)}
                                 >
-                                    {category.isPromo && <span className="promo-category-icon">🔥</span>}
+                                    {category.isPromo && (
+                                        <>
+                                            <span className="promo-badge-top">АКЦИЯ 🔥</span>
+                                            <span className="promo-category-icon">🔥</span>
+                                        </>
+                                    )}
                                     <Icon className="category-icon" />
                                     <span className="category-name">{category.name}</span>
+                                    <span className="category-count">{itemCount}</span>
                                     {isSelected && <span className="category-active-dot"></span>}
                                 </button>
                             );
@@ -287,7 +299,12 @@ const Menu = () => {
                                                 alt={item.name}
                                                 className="item-img"
                                             />
-                                            {item.isTop && (
+                                            {item.category === 'promo' && (
+                                                <div className="promo-item-badge">
+                                                    🔥 Акция
+                                                </div>
+                                            )}
+                                            {item.isTop && item.category !== 'promo' && (
                                                 <span className="item-badge">Хит</span>
                                             )}
                                         </div>
