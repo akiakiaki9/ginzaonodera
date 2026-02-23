@@ -13,7 +13,7 @@ const Header = () => {
 
     const videos = [
         '/videos/ginza.mp4',
-        '/videos/ginza2.mp4', 
+        '/videos/ginza2.mp4',
         '/videos/ginza3.mp4'
     ];
 
@@ -82,7 +82,7 @@ const Header = () => {
 
             await Promise.all(promises);
             setIsContentLoaded(true);
-            
+
             // Запускаем первое видео
             if (videoRefs.current[0]) {
                 try {
@@ -145,22 +145,22 @@ const Header = () => {
 
                 {/* Акции с анимацией */}
                 <div className="promo-banners">
-    <div className="promo-item promo-left">
-        <span className="promo-badge">🔥</span>
-        <div className="promo-text">
-            <span className="promo-highlight">20%</span> скидки
-        </div>
-        <span className="promo-small">за заказ на сайте</span>
-    </div>
+                    <div className="promo-item promo-left">
+                        <span className="promo-badge">🔥</span>
+                        <div className="promo-text">
+                            <span className="promo-highlight">20%</span> скидки
+                        </div>
+                        <span className="promo-small">за заказ на сайте</span>
+                    </div>
 
-    <div className="promo-item promo-right">
-        <span className="promo-badge">🎁</span>
-        <div className="promo-text">
-            <span className="promo-highlight">Ролл в подарок</span>
-        </div>
-        <span className="promo-small">от сушефа при заказе от 299 000 сум</span>
-    </div>
-</div>
+                    <div className="promo-item promo-right">
+                        <span className="promo-badge">🎁</span>
+                        <div className="promo-text">
+                            <span className="promo-highlight">Ролл в подарок</span>
+                        </div>
+                        <span className="promo-small">от шеф повара при заказе от 299 000 сум</span>
+                    </div>
+                </div>
 
                 <div className="hero-buttons">
                     <Link href="/menu" className="hero-btn primary">
