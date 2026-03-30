@@ -1,4 +1,3 @@
-// src/app/cart/page.js
 'use client';
 
 import { useState } from 'react';
@@ -34,6 +33,12 @@ const CartPage = () => {
 
     const handleCheckout = () => {
         setIsModalOpen(true);
+    };
+
+    // Функция для безопасного форматирования цены
+    const formatPrice = (price) => {
+        const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+        return isNaN(numPrice) ? '0' : numPrice.toLocaleString();
     };
 
     if (cartItems.length === 0) {
@@ -110,7 +115,7 @@ const CartPage = () => {
                                     <div className="cart-item-info">
                                         <h3 className="cart-item-name">{item.name}</h3>
                                         <div className="cart-item-price">
-                                            {item.price.toLocaleString()} сум
+                                            {formatPrice(item.price)} сум
                                         </div>
                                     </div>
 
@@ -131,7 +136,7 @@ const CartPage = () => {
                                     </div>
 
                                     <div className="cart-item-total">
-                                        {(item.price * item.quantity).toLocaleString()} сум
+                                        {formatPrice(item.price * item.quantity)} сум
                                     </div>
 
                                     <button
@@ -170,7 +175,7 @@ const CartPage = () => {
                                             {item.name} x{item.quantity}
                                         </span>
                                         <span className="summary-item-price">
-                                            {(item.price * item.quantity).toLocaleString()} сум
+                                            {formatPrice(item.price * item.quantity)} сум
                                         </span>
                                     </div>
                                 ))}
@@ -179,7 +184,7 @@ const CartPage = () => {
                             <div className="summary-total">
                                 <span>Общая сумма:</span>
                                 <span className="total-price">
-                                    {getCartTotal().toLocaleString()} сум
+                                    {formatPrice(getCartTotal())} сум
                                 </span>
                             </div>
 

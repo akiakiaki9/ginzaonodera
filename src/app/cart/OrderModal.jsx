@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FaTimes, FaPhone, FaEnvelope, FaUser, FaShoppingBag, FaMoneyBill, FaCheckCircle } from 'react-icons/fa';
+import { FaTimes, FaPhone, FaUser, FaShoppingBag, FaMoneyBill, FaCheckCircle, FaTelegramPlane } from 'react-icons/fa';
 import { SiClickup } from 'react-icons/si';
 import { useCart } from '../context/CartContext';
 import './ordermodal.css';
@@ -9,77 +9,92 @@ import './ordermodal.css';
 const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('cash'); // 'cash' или 'click'
+    const [paymentMethod, setPaymentMethod] = useState('cash');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
     const { clearCart } = useCart();
 
     const phoneNumber = '+998 (94) 778-08-80';
+    // Для отправки в Telegram по номеру телефона, нужно получить username
+    // Номер телефона в Telegram: @username или chat_id
+    // В данном случае используем ссылку для перехода в диалог с пользователем
+    const telegramUsername = 'ginza_onodera_admin'; // Замените на реальный username получателя
 
-    // Реквизиты для Click
     const clickDetails = {
         cardNumber: '6262 5700 0040 8270',
         holderName: 'Халимов Ф М',
+    };
+
+    // Функция для безопасного форматирования цены
+    const formatPrice = (price) => {
+        const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+        return isNaN(numPrice) ? '0' : numPrice.toLocaleString();
+    };
+
+    // Формирование текста заказа для Telegram
+    const formatOrderMessage = () => {
+        const orderItemsList = cartItems.map((item, index) => {
+            const price = typeof item.price === 'string' ? parseFloat(item.price) : item.price;
+            const itemTotal = price * item.quantity;
+            return `${index + 1}. ${item.name} x${item.quantity} - ${isNaN(itemTotal) ? '0' : itemTotal.toLocaleString()} сум`;
+        }).join('\n');
+
+        const currentDate = new Date().toLocaleString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        const totalAmount = typeof total === 'string' ? parseFloat(total) : total;
+
+        // Формируем сообщение без HTML-тегов для обычного текста
+        return `🛍 НОВЫЙ ЗАКАЗ!
+
+👤 Клиент: ${name}
+📞 Телефон: ${phone}
+💳 Способ оплаты: ${paymentMethod === 'cash' ? 'Наличные' : 'Click'}
+💰 Общая сумма: ${isNaN(totalAmount) ? '0' : totalAmount.toLocaleString()} сум
+🕐 Время заказа: ${currentDate}
+
+📦 Состав заказа:
+${orderItemsList}
+
+${paymentMethod === 'click' ? `💳 Click реквизиты:
+Карта: ${clickDetails.cardNumber}
+Получатель: ${clickDetails.holderName}` : ''}
+
+✅ Статус: Ожидает подтверждения`;
     };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Формируем текст заказа для отправки
-        const orderItemsList = cartItems.map(item =>
-            `${item.name} x${item.quantity} - ${(item.price * item.quantity).toLocaleString()} сум`
-        ).join('\n');
-
-        // Формируем данные для отправки
-        const formData = new FormData();
-        formData.append('access_key', '22c186b3-8dd8-4f97-97b7-e7dc76a524ab');
-        
-        // Основная информация
-        formData.append('name', name);
-        formData.append('phone', phone);
-        formData.append('payment_method', paymentMethod === 'cash' ? 'Наличные' : 'Click');
-        formData.append('total_amount', `${total.toLocaleString()} сум`);
-        
-        // Детали заказа
-        formData.append('order_details', orderItemsList);
-        formData.append('items_count', cartItems.length.toString());
-        
-        // Тема письма
-        formData.append('subject', `Новый заказ от ${name} - ${paymentMethod === 'cash' ? 'Наличные' : 'Click'}`);
-        
-        // От кого
-        formData.append('from_name', 'Сайт Суши-магазин');
-        
-        // Дополнительная информация
-        if (paymentMethod === 'click') {
-            formData.append('click_card', clickDetails.cardNumber);
-            formData.append('click_holder', clickDetails.holderName);
-            formData.append('payment_note', 'Клиент оплатит через Click');
-        }
-
         try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                setSubmitStatus('success');
-                clearCart();
-                setTimeout(() => {
-                    onClose();
-                    setSubmitStatus(null);
-                    setName('');
-                    setPhone('');
-                    setPaymentMethod('cash');
-                }, 3000);
-            } else {
-                setSubmitStatus('error');
-                console.error('Ошибка отправки:', data);
-            }
+            const messageText = formatOrderMessage();
+            
+            // Способ 1: Открыть чат с конкретным пользователем Telegram по username
+            const telegramUrl = `https://t.me/${telegramUsername}?text=${encodeURIComponent(messageText)}`;
+            
+            // Способ 2: Если нужен прямой переход на номер (не всегда работает)
+            // const telegramUrl = `tg://resolve?phone=${phoneNumber.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(messageText)}`;
+            
+            // Открываем Telegram в новой вкладке с готовым сообщением
+            window.open(telegramUrl, '_blank');
+            
+            setSubmitStatus('success');
+            clearCart();
+            
+            setTimeout(() => {
+                onClose();
+                setSubmitStatus(null);
+                setName('');
+                setPhone('');
+                setPaymentMethod('cash');
+            }, 3000);
+            
         } catch (error) {
             console.error('Ошибка:', error);
             setSubmitStatus('error');
@@ -109,20 +124,24 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                 <div className="order-summary">
                     <h3 className="summary-label">Ваш заказ:</h3>
                     <div className="order-items">
-                        {cartItems.map((item) => (
-                            <div key={item.id} className="order-item">
-                                <span className="order-item-name">
-                                    {item.name} x{item.quantity}
-                                </span>
-                                <span className="order-item-price">
-                                    {(item.price * item.quantity).toLocaleString()} сум
-                                </span>
-                            </div>
-                        ))}
+                        {cartItems.map((item) => {
+                            const price = typeof item.price === 'string' ? parseFloat(item.price) : item.price;
+                            const itemTotal = price * item.quantity;
+                            return (
+                                <div key={item.id} className="order-item">
+                                    <span className="order-item-name">
+                                        {item.name} x{item.quantity}
+                                    </span>
+                                    <span className="order-item-price">
+                                        {isNaN(itemTotal) ? '0' : itemTotal.toLocaleString()} сум
+                                    </span>
+                                </div>
+                            );
+                        })}
                     </div>
                     <div className="order-total">
                         <span>Итого:</span>
-                        <span className="total-amount">{total.toLocaleString()} сум</span>
+                        <span className="total-amount">{formatPrice(total)} сум</span>
                     </div>
                 </div>
 
@@ -210,14 +229,17 @@ const OrderModal = ({ isOpen, onClose, cartItems, total }) => {
                         {isSubmitting ? (
                             'Отправка...'
                         ) : (
-                            paymentMethod === 'cash' ? 'Подтвердить заказ' : 'Отправить заказ'
+                            <>
+                                <FaTelegramPlane style={{ marginRight: '8px' }} />
+                                Отправить в Telegram
+                            </>
                         )}
                     </button>
 
                     {submitStatus === 'success' && (
                         <div className="success-message">
                             <FaCheckCircle className="success-icon" />
-                            Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.
+                            Заказ отправлен в Telegram! Менеджер свяжется с вами.
                         </div>
                     )}
 
