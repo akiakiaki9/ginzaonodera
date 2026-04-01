@@ -145,13 +145,13 @@ const Header = () => {
 
                 {/* Акции с анимацией */}
                 <div className="promo-banners">
-                    <div className="promo-item promo-left">
+                    {/* <div className="promo-item promo-left">
                         <span className="promo-badge">🔥</span>
                         <div className="promo-text">
                             <span className="promo-highlight">20%</span> скидки
                         </div>
                         <span className="promo-small">за заказ на сайте</span>
-                    </div>
+                    </div> */}
 
                     <div className="promo-item promo-right">
                         <span className="promo-badge">🎁</span>
