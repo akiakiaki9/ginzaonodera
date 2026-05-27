@@ -11,20 +11,17 @@ import { FaUtensils, FaFish, FaLeaf, FaCoffee } from "react-icons/fa";
 import { useCart } from '@/app/context/CartContext';
 import DATA from '@/app/utils/data';
 import './menu.css';
-import { FaWineBottle } from "react-icons/fa";
-import { FaBowlFood } from "react-icons/fa6";
-import { FaBowlRice } from "react-icons/fa6";
-import { FaAngleLeft } from "react-icons/fa";
-import { FaAngleRight } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaWineBottle, FaAngleLeft, FaAngleRight, FaArrowRight, FaShoppingCart } from "react-icons/fa";
+import { FaBowlFood, FaBowlRice } from "react-icons/fa6";
 
 const Menu = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [categoryItems, setCategoryItems] = useState([]);
     const [isAnimating, setIsAnimating] = useState(false);
     const [addedItems, setAddedItems] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
     const { addToCart } = useCart();
+    const itemsPerPage = 30;
 
     // Для drag-to-scroll
     const scrollContainerRef = useRef(null);
@@ -61,29 +58,39 @@ const Menu = () => {
 
     useEffect(() => {
         setIsAnimating(true);
+        setCurrentPage(1); // Сбрасываем страницу при смене категории
 
         setTimeout(() => {
             let filtered = [];
-            
+
             if (selectedCategory === 'all') {
-                // Для "Все меню" показываем ВСЕ товары (но можно и случайные)
-                filtered = [...DATA]; // Убрал slice(0,6) чтобы показывать все
+                filtered = [...DATA];
             } else {
-                // Фильтруем по категории из данных
                 filtered = DATA.filter(item => item.category === selectedCategory);
             }
-            
+
             setCategoryItems(filtered);
             setIsAnimating(false);
         }, 300);
     }, [selectedCategory]);
 
+    // Пагинация
+    const totalPages = Math.ceil(categoryItems.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = categoryItems.slice(startIndex, endIndex);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const handleAddToCart = (item, e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         addToCart(item, 1);
-        
+
         setAddedItems(prev => ({ ...prev, [item.id]: true }));
         setTimeout(() => {
             setAddedItems(prev => ({ ...prev, [item.id]: false }));
@@ -257,7 +264,7 @@ const Menu = () => {
                     )}
                 </div>
 
-                {/* Индикаторы страниц */}
+                {/* Индикаторы страниц категорий */}
                 <div className="page-indicators">
                     {Array.from({ length: Math.ceil(categories.length / 4) }).map((_, idx) => (
                         <button
@@ -275,53 +282,108 @@ const Menu = () => {
                     ))}
                 </div>
 
-                {/* Превью товаров категории - ТЕПЕРЬ ПОКАЗЫВАЕТ ВСЕ ТОВАРЫ */}
+                {/* Превью товаров категории с пагинацией */}
                 <div className={`category-items ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-                    {categoryItems.length > 0 ? (
-                        <div className="items-grid">
-                            {categoryItems.map((item) => (
-                                <div key={item.id} className="item-card-wrapper">
-                                    <Link
-                                        href={`/product/${item.id}`}
-                                        className="item-card"
-                                    >
-                                        <div className="item-image">
-                                            <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="item-img"
-                                            />
-                                            {item.category === 'promo' && (
-                                                <div className="promo-item-badge">
-                                                    🔥 Акция
-                                                </div>
-                                            )}
-                                            {item.category === 'sets' && (
-                                                <div className="sets-item-badge">
-                                                    🍱 Сет
-                                                </div>
-                                            )}
-                                            {item.isTop && item.category !== 'promo' && item.category !== 'sets' && (
-                                                <span className="item-badge">Хит</span>
-                                            )}
-                                        </div>
-                                        <div className="item-info">
-                                            <h3 className="item-name">{item.name}</h3>
-                                            <div className="item-price-row">
-                                                <span className="item-price">{item.price.toLocaleString()} сум</span>
-                                                <button 
-                                                    className={`item-cart-btn ${addedItems[item.id] ? 'added' : ''}`}
-                                                    onClick={(e) => handleAddToCart(item, e)}
-                                                    aria-label="Добавить в корзину"
-                                                >
-                                                    {addedItems[item.id] ? <FaCheck /> : <FaShoppingCart />}
-                                                </button>
+                    {currentItems.length > 0 ? (
+                        <>
+                            <div className="items-grid">
+                                {currentItems.map((item) => (
+                                    <div key={item.id} className="item-card-wrapper">
+                                        <Link
+                                            href={`/product/${item.id}`}
+                                            className="item-card"
+                                        >
+                                            <div className="item-image">
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    className="item-img"
+                                                />
+                                                {item.category === 'promo' && (
+                                                    <div className="promo-item-badge">
+                                                        🔥 Акция
+                                                    </div>
+                                                )}
+                                                {item.category === 'sets' && (
+                                                    <div className="sets-item-badge">
+                                                        🍱 Сет
+                                                    </div>
+                                                )}
+                                                {item.isTop && item.category !== 'promo' && item.category !== 'sets' && (
+                                                    <span className="item-badge">Хит</span>
+                                                )}
                                             </div>
-                                        </div>
-                                    </Link>
+                                            <div className="item-info">
+                                                <h3 className="item-name">{item.name}</h3>
+                                                <div className="item-price-row">
+                                                    <span className="item-price">{item.price.toLocaleString()} сум</span>
+                                                    <button
+                                                        className={`item-cart-btn ${addedItems[item.id] ? 'added' : ''}`}
+                                                        onClick={(e) => handleAddToCart(item, e)}
+                                                        aria-label="Добавить в корзину"
+                                                    >
+                                                        {addedItems[item.id] ? <FaCheck /> : <FaShoppingCart />}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Пагинация */}
+                            {totalPages > 1 && (
+                                <div className="pagination">
+                                    <button
+                                        className="pagination-btn"
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        disabled={currentPage === 1}
+                                    >
+                                        <FaAngleLeft />
+                                    </button>
+
+                                    <div className="pagination-pages">
+                                        {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                                            let pageNum;
+                                            if (totalPages <= 5) {
+                                                pageNum = i + 1;
+                                            } else if (currentPage <= 3) {
+                                                pageNum = i + 1;
+                                            } else if (currentPage >= totalPages - 2) {
+                                                pageNum = totalPages - 4 + i;
+                                            } else {
+                                                pageNum = currentPage - 2 + i;
+                                            }
+
+                                            if (pageNum <= totalPages && pageNum > 0) {
+                                                return (
+                                                    <button
+                                                        key={pageNum}
+                                                        className={`pagination-page ${currentPage === pageNum ? 'active' : ''}`}
+                                                        onClick={() => handlePageChange(pageNum)}
+                                                    >
+                                                        {pageNum}
+                                                    </button>
+                                                );
+                                            }
+                                            return null;
+                                        })}
+                                    </div>
+
+                                    <button
+                                        className="pagination-btn"
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        <FaAngleRight />
+                                    </button>
                                 </div>
-                            ))}
-                        </div>
+                            )}
+
+                            <div className="items-count-info">
+                                Показано {startIndex + 1}–{Math.min(endIndex, categoryItems.length)} из {categoryItems.length} товаров
+                            </div>
+                        </>
                     ) : (
                         <div className="no-items">
                             <p>В этой категории пока нет товаров</p>

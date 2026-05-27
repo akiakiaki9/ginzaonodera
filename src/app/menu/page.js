@@ -47,58 +47,55 @@ const MenuPage = () => {
     const { addToCart } = useCart();
     const filterRef = useRef(null);
 
-    // Категории с иконками
+    const getCategoryCount = (categoryId) => {
+        if (categoryId === 'all') return DATA.length;
+        return DATA.filter(item => item.category === categoryId).length;
+    };
+
     const categories = [
-        { id: 'all', name: 'Все блюда', icon: FiGrid, count: DATA.length },
-        { id: 'promo', name: 'Акционные блюда', icon: FaFire, count: DATA.filter(item => item.category === 'promo').length, isPromo: true },
-        { id: 'sets', name: 'Сеты', icon: FaUtensils, count: DATA.filter(item => item.category === 'sets').length },
-        { id: 'noodles', name: 'Лапша', icon: GiNoodles, count: DATA.filter(item => item.category === 'noodles').length },
-        { id: 'rolls', name: 'Горячие роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'rolls').length },
-        { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis, count: DATA.filter(item => item.category === 'cold_rolls').length },
-        { id: 'soups', name: 'Супы', icon: MdOutlineSoupKitchen, count: DATA.filter(item => item.category === 'soups').length },
-        { id: 'hot_dishes', name: 'Горячие блюда', icon: GiFishCooked, count: DATA.filter(item => item.category === 'hot_dishes').length },
-        { id: 'salads', name: 'Салаты', icon: LuSalad, count: DATA.filter(item => item.category === 'salads').length },
-        { id: 'snacks', name: 'Закуски', icon: GiChickenLeg, count: DATA.filter(item => item.category === 'snacks').length },
-        { id: 'sushis', name: 'Суши', icon: GiSushis, count: DATA.filter(item => item.category === 'sushis').length },
-        { id: 'fried_rice', name: 'Жареный рис', icon: GiBowlOfRice, count: DATA.filter(item => item.category === 'fried_rice').length },
-        { id: 'coffee', name: 'Кофе', icon: FiCoffee, count: DATA.filter(item => item.category === 'coffee').length },
-        { id: 'tea', name: 'Чай', icon: FiCoffee, count: DATA.filter(item => item.category === 'tea').length },
+        { id: 'all', name: 'Все блюда', icon: FiGrid },
+        { id: 'promo', name: 'Акционные блюда', icon: FaFire, isPromo: true },
+        { id: 'sets', name: 'Сеты', icon: FaUtensils },
+        { id: 'noodles', name: 'Лапша', icon: GiNoodles },
+        { id: 'rolls', name: 'Горячие роллы', icon: GiSushis },
+        { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis },
+        { id: 'soups', name: 'Супы', icon: MdOutlineSoupKitchen },
+        { id: 'hot_dishes', name: 'Горячие блюда', icon: GiFishCooked },
+        { id: 'salads', name: 'Салаты', icon: LuSalad },
+        { id: 'snacks', name: 'Закуски', icon: GiChickenLeg },
+        { id: 'sushis', name: 'Суши', icon: GiSushis },
+        { id: 'fried_rice', name: 'Жареный рис', icon: GiBowlOfRice },
+        { id: 'coffee', name: 'Кофе', icon: FiCoffee },
+        { id: 'tea', name: 'Чай', icon: FiCoffee },
     ];
 
-    // Инициализация
+    const categoriesWithCount = categories.map(cat => ({
+        ...cat,
+        count: getCategoryCount(cat.id)
+    }));
+
     useEffect(() => {
         setItems(DATA);
         setFilteredItems(DATA);
-        
-        // Отладка: проверим сколько товаров в каждой категории
-        console.log('=== ПРОВЕРКА КАТЕГОРИЙ ===');
-        console.log('Промо товары:', DATA.filter(item => item.category === 'promo').length);
-        console.log('Сеты:', DATA.filter(item => item.category === 'sets').length);
     }, []);
 
-    // Фильтрация и сортировка
     useEffect(() => {
         let result = [...items];
 
-        // Фильтр по категории
         if (selectedCategory !== 'all') {
             result = result.filter(item => item.category === selectedCategory);
-            console.log(`Выбрана категория: ${selectedCategory}, найдено: ${result.length} товаров`);
         }
 
-        // Поиск
         if (searchQuery) {
             result = result.filter(item =>
                 item.name.toLowerCase().includes(searchQuery.toLowerCase())
             );
         }
 
-        // Фильтр по цене
         result = result.filter(item =>
             item.price >= priceRange.min && item.price <= priceRange.max
         );
 
-        // Сортировка
         switch (sortBy) {
             case 'price-asc':
                 result.sort((a, b) => a.price - b.price);
@@ -122,7 +119,7 @@ const MenuPage = () => {
     const handleAddToCart = (item, e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         addToCart(item, 1);
 
         setAddedItems(prev => ({ ...prev, [item.id]: true }));
@@ -145,7 +142,6 @@ const MenuPage = () => {
 
     return (
         <div className="menu-page">
-            {/* Hero секция */}
             <div className="menu-hero">
                 <div className="hero-overlay"></div>
                 <div className="hero-content">
@@ -165,7 +161,6 @@ const MenuPage = () => {
             </div>
 
             <div className="container">
-                {/* Поиск и фильтры */}
                 <div className="menu-toolbar">
                     <div className="search-wrapper">
                         <FaSearch className="search-icon" />
@@ -225,11 +220,9 @@ const MenuPage = () => {
                     </div>
                 </div>
 
-                {/* Расширенные фильтры */}
                 {showFilters && (
                     <div className="filters-panel" ref={filterRef}>
                         <div className="filters-grid">
-                            {/* Категории */}
                             <div className="filter-section compact">
                                 <div
                                     className="filter-header compact"
@@ -241,11 +234,11 @@ const MenuPage = () => {
                                 {showCategoryFilter && (
                                     <div className="filter-content compact">
                                         <div className="categories-compact-grid">
-                                            {categories.map(cat => {
+                                            {categoriesWithCount.map(cat => {
                                                 const Icon = cat.icon;
                                                 const isActive = selectedCategory === cat.id;
                                                 const isPromo = cat.isPromo;
-                                                
+
                                                 return (
                                                     <button
                                                         key={cat.id}
@@ -256,7 +249,7 @@ const MenuPage = () => {
                                                         <Icon className="category-compact-icon" />
                                                         <span className="category-compact-name">{cat.name}</span>
                                                         <span className="category-compact-count">{cat.count}</span>
-                                                        {isPromo && <span className="promo-badge-mini">Акция</span>}
+                                                        {isPromo && cat.count > 0 && <span className="promo-badge-mini">Акция</span>}
                                                     </button>
                                                 );
                                             })}
@@ -265,7 +258,6 @@ const MenuPage = () => {
                                 )}
                             </div>
 
-                            {/* Ценовой диапазон */}
                             <div className="filter-section">
                                 <div
                                     className="filter-header"
@@ -329,7 +321,6 @@ const MenuPage = () => {
                     </div>
                 )}
 
-                {/* Результаты */}
                 <div className={`menu-items ${viewMode}`}>
                     {filteredItems.length > 0 ? (
                         filteredItems.map((item) => {
