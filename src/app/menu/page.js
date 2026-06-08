@@ -34,7 +34,6 @@ import { FaUtensils, FaFire } from "react-icons/fa";
 const MenuPage = () => {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [sortBy, setSortBy] = useState('default');
     const [priceRange, setPriceRange] = useState({ min: 0, max: 200000 });
@@ -42,37 +41,48 @@ const MenuPage = () => {
     const [viewMode, setViewMode] = useState('grid');
     const [addedItems, setAddedItems] = useState({});
     const [showPriceFilter, setShowPriceFilter] = useState(true);
-    const [showCategoryFilter, setShowCategoryFilter] = useState(true);
 
     const { addToCart } = useCart();
     const filterRef = useRef(null);
 
-    const getCategoryCount = (categoryId) => {
-        if (categoryId === 'all') return DATA.length;
-        return DATA.filter(item => item.category === categoryId).length;
+    // Функция для получения названия категории по ID
+    const getCategoryName = (categoryId) => {
+        const categories = {
+            'promo': 'Акция',
+            'sets': 'Сеты',
+            'noodles': 'Лапша',
+            'rolls': 'Горячие роллы',
+            'cold_rolls': 'Холодные роллы',
+            'soups': 'Супы',
+            'hot_dishes': 'Горячие блюда',
+            'salads': 'Салаты',
+            'snacks': 'Закуски',
+            'sushis': 'Суши',
+            'fried_rice': 'Жареный рис',
+            'coffee': 'Кофе',
+            'tea': 'Чай'
+        };
+        return categories[categoryId] || 'Блюдо';
     };
 
-    const categories = [
-        { id: 'all', name: 'Все блюда', icon: FiGrid },
-        { id: 'promo', name: 'Акционные блюда', icon: FaFire, isPromo: true },
-        { id: 'sets', name: 'Сеты', icon: FaUtensils },
-        { id: 'noodles', name: 'Лапша', icon: GiNoodles },
-        { id: 'rolls', name: 'Горячие роллы', icon: GiSushis },
-        { id: 'cold_rolls', name: 'Холодные роллы', icon: GiSushis },
-        { id: 'soups', name: 'Супы', icon: MdOutlineSoupKitchen },
-        { id: 'hot_dishes', name: 'Горячие блюда', icon: GiFishCooked },
-        { id: 'salads', name: 'Салаты', icon: LuSalad },
-        { id: 'snacks', name: 'Закуски', icon: GiChickenLeg },
-        { id: 'sushis', name: 'Суши', icon: GiSushis },
-        { id: 'fried_rice', name: 'Жареный рис', icon: GiBowlOfRice },
-        { id: 'coffee', name: 'Кофе', icon: FiCoffee },
-        { id: 'tea', name: 'Чай', icon: FiCoffee },
-    ];
-
-    const categoriesWithCount = categories.map(cat => ({
-        ...cat,
-        count: getCategoryCount(cat.id)
-    }));
+    const getCategoryIcon = (categoryId) => {
+        const icons = {
+            'sets': FaUtensils,
+            'noodles': GiNoodles,
+            'rolls': GiSushis,
+            'cold_rolls': GiSushis,
+            'soups': MdOutlineSoupKitchen,
+            'hot_dishes': GiFishCooked,
+            'salads': LuSalad,
+            'snacks': GiChickenLeg,
+            'sushis': GiSushis,
+            'fried_rice': GiBowlOfRice,
+            'coffee': FiCoffee,
+            'tea': FiCoffee,
+            'promo': FaFire
+        };
+        return icons[categoryId] || FiGrid;
+    };
 
     useEffect(() => {
         setItems(DATA);
@@ -81,10 +91,6 @@ const MenuPage = () => {
 
     useEffect(() => {
         let result = [...items];
-
-        if (selectedCategory !== 'all') {
-            result = result.filter(item => item.category === selectedCategory);
-        }
 
         if (searchQuery) {
             result = result.filter(item =>
@@ -114,7 +120,7 @@ const MenuPage = () => {
         }
 
         setFilteredItems(result);
-    }, [selectedCategory, searchQuery, sortBy, priceRange, items]);
+    }, [searchQuery, sortBy, priceRange, items]);
 
     const handleAddToCart = (item, e) => {
         e.preventDefault();
@@ -129,15 +135,9 @@ const MenuPage = () => {
     };
 
     const clearFilters = () => {
-        setSelectedCategory('all');
         setSearchQuery('');
         setSortBy('default');
         setPriceRange({ min: 0, max: 200000 });
-    };
-
-    const getCategoryIcon = (categoryId) => {
-        const category = categories.find(c => c.id === categoryId);
-        return category?.icon || FiGrid;
     };
 
     return (
@@ -223,41 +223,6 @@ const MenuPage = () => {
                 {showFilters && (
                     <div className="filters-panel" ref={filterRef}>
                         <div className="filters-grid">
-                            <div className="filter-section compact">
-                                <div
-                                    className="filter-header compact"
-                                    onClick={() => setShowCategoryFilter(!showCategoryFilter)}
-                                >
-                                    <h3>Категории</h3>
-                                    <FaChevronDown className={`arrow ${showCategoryFilter ? 'open' : ''}`} />
-                                </div>
-                                {showCategoryFilter && (
-                                    <div className="filter-content compact">
-                                        <div className="categories-compact-grid">
-                                            {categoriesWithCount.map(cat => {
-                                                const Icon = cat.icon;
-                                                const isActive = selectedCategory === cat.id;
-                                                const isPromo = cat.isPromo;
-
-                                                return (
-                                                    <button
-                                                        key={cat.id}
-                                                        className={`category-compact-btn ${isActive ? 'active' : ''} ${isPromo ? 'promo-category' : ''}`}
-                                                        onClick={() => setSelectedCategory(cat.id)}
-                                                    >
-                                                        {isPromo && <span className="promo-category-icon">🔥</span>}
-                                                        <Icon className="category-compact-icon" />
-                                                        <span className="category-compact-name">{cat.name}</span>
-                                                        <span className="category-compact-count">{cat.count}</span>
-                                                        {isPromo && cat.count > 0 && <span className="promo-badge-mini">Акция</span>}
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
                             <div className="filter-section">
                                 <div
                                     className="filter-header"
@@ -325,6 +290,7 @@ const MenuPage = () => {
                     {filteredItems.length > 0 ? (
                         filteredItems.map((item) => {
                             const CategoryIcon = getCategoryIcon(item.category);
+                            const categoryName = getCategoryName(item.category);
                             return (
                                 <div key={item.id} className="menu-item-card-wrapper">
                                     <div className={`menu-item-card ${viewMode} 
@@ -363,6 +329,11 @@ const MenuPage = () => {
                                             <Link href={`/product/${item.id}`} className="item-name-link">
                                                 <h3 className="item-name">{item.name}</h3>
                                             </Link>
+
+                                            {/* Отображение названия категории */}
+                                            <div className="item-category-name">
+                                                {categoryName}
+                                            </div>
 
                                             <div className="item-price-row">
                                                 <span className="item-price">

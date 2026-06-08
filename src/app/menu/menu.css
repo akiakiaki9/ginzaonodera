@@ -1412,3 +1412,48 @@
         font-size: 11px !important;
     }
 }
+
+/* Название категории в карточке */
+.item-category-name {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+    width: fit-content;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+}
+
+/* Стиль для категории в карточке промо-товара */
+.promo-item .item-category-name {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #FFD700;
+    color: #FFD700;
+}
+
+/* Стиль для категории в карточке сета */
+.sets-item .item-category-name {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+    color: #4CAF50;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .item-category-name {
+        font-size: 10px;
+        padding: 3px 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .item-category-name {
+        font-size: 9px;
+        padding: 2px 8px;
+        margin-bottom: 8px;
+    }
+}
